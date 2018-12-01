@@ -6,9 +6,9 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Test.
- * @author Ayder Khayredinov (emage.haf@gmail.com)
- * @since 01.12.2018
- * @version 1
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @since 01.12.2018.
+ * @version 1.
  */
 public class CalculatorTest {
 

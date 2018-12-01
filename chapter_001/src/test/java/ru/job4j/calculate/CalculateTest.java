@@ -6,12 +6,12 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Test.
- *
- * @author Ayder Khayredinov (emage.haf@gmail.com)
- * @version $Id$
- * @since 0.1
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @since 01.12.2018.
+ * @version 1.
  */
 public class CalculateTest {
+
 	/**
 	 * Test echo.
 	 */
