@@ -12,8 +12,8 @@ public class Point {
     /**
      * поля x,y на оси координат.
      */
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     /**
      * конструктор - инициализация точки в системе координат.
