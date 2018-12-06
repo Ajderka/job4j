@@ -19,6 +19,7 @@ public class Counter {
      *
      * @param start  - первый аргумент выражения.
      * @param finish - последний аргумент выражения.
+     * @return var - сумма четных чисел в заданном диапазоне.
      */
     public int add(int start, int finish) {
 
