@@ -1,11 +1,11 @@
 package ru.job4j.max;
 
 /**
- * Class  4.4. Максимум из трех чисел[#91004]
+ * Class  4.4. Максимум из трех чисел[#91004].
  *
- * @author Ayder Khayredinov (emage.haf@gmail.com)
- * @version 1
- * @since 05.12.2018
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 05.12.2018.
  */
 public class Max {
 

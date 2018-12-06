@@ -8,9 +8,9 @@ import static org.junit.Assert.assertThat;
 /**
  * Test.
  *
- * @author Ayder Khayredinov (emage.haf@gmail.com)
- * @version 1
- * @since 05.12.2018
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 05.12.2018.
  */
 public class MaxTest {
 
