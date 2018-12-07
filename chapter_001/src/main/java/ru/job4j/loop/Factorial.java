@@ -22,13 +22,9 @@ public class Factorial {
      * @return fact - рассчитанный факториал для числа n.
      */
     public int calc(int n) {
-        if (n == 0) {
-            return 1;
-        } else {
-            for (int index = 1; index <= n; index++) {
-                fact *= index;
-            }
-            return fact;
+        for (int index = 1; index <= n; index++) {
+            fact *= index;
         }
+        return fact;
     }
 }

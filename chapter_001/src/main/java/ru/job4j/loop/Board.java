@@ -17,27 +17,10 @@ public class Board {
      * @return screen.toString() - возвращает все добавленные в него символы и строки в одну строку .
      */
     public String paint(int width, int height) {
-
-        /*
-         * Для сложения строк используем класс StringBuilder.
-         */
         StringBuilder screen = new StringBuilder();
-
-        /*
-         *  Высота доски достигается за счёт переходов на новую линию.
-         *  необходимо использовать System.getProperty("line.separator").
-         */
         String ln = System.lineSeparator();
-
-        /*
-         * Здесь 2 цикла - внешний отвечает за высоту доски, вложенный отвечает за ширину доски.
-         */
         for (int ver = 1; ver <= height; ver++) {
             for (int hor = 1; hor <= width; hor++) {
-
-                /*
-                 * индексы попадаются на крестики когда их сумма делится на 2 без остатка.
-                 */
                 if ((ver + hor) % 2 == 0) {
                     screen.append("X");
                 } else {
