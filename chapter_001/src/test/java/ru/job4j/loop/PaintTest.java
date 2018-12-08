@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  *
  * @author Ayder Khayredinov (emage.haf@gmail.com).
  * @version 1.
- * @since 07.12.2018.
+ * @since 08.12.2018.
  */
 
 public class PaintTest {
