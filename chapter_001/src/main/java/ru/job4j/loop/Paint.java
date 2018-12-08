@@ -10,6 +10,50 @@ package ru.job4j.loop;
 public class Paint {
 
     /**
+     * Method paint - должен рисовать правую сторону пирамиды из символа ^ и пробелов;.
+     *
+     * @param height - высота пирамиды.
+     * @return screen.toString() - возвращает все добавленные в него символы и строки в одну строку .
+     */
+    public String rightTrl(int height) {
+        StringBuilder screen = new StringBuilder();
+        int weight = height;
+        for (int row = 0; row != height; row++) {
+            for (int column = 0; column != weight; column++) {
+                if (row >= column) {
+                    screen.append("^");
+                } else {
+                    screen.append(" ");
+                }
+            }
+            screen.append(System.lineSeparator());
+        }
+        return screen.toString();
+    }
+
+    /**
+     * Method paint - должен рисовать левую сторону пирамиды из символа ^ и пробелов;.
+     *
+     * @param height - высота пирамиды.
+     * @return screen.toString() - возвращает все добавленные в него символы и строки в одну строку .
+     */
+    public String leftTrl(int height) {
+        StringBuilder screen = new StringBuilder();
+        int weight = height;
+        for (int row = 0; row != height; row++) {
+            for (int column = 0; column != weight; column++) {
+                if (row >= weight - column - 1) {
+                    screen.append("^");
+                } else {
+                    screen.append(" ");
+                }
+            }
+            screen.append(System.lineSeparator());
+        }
+        return screen.toString();
+    }
+
+    /**
      * Method paint - должен рисовать пирамиду из символа ^ и пробелов;.
      *
      * @param height - высота пирамиды.
