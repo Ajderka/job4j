@@ -16,11 +16,9 @@ public class Check {
      * @return true если массив заполнен только true или толко false, если в перемешку то выводит false.
      */
     public boolean mono(boolean[] data) {
-        boolean result = false;
+        boolean result = true;
         for (int index = 0; index < data.length - 1; index++) {
-            if (data[index] == data[index + 1]) {
-                result = true;
-            } else {
+            if (data[index] != data[index + 1]) {
                 result = false;
                 break;
             }
