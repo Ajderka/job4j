@@ -33,6 +33,7 @@ public class ArrayChar {
         for (int index = 0; index < prefix.length(); index++) {
             if (data[index] != value[index]) {
                 result = false;
+                break;
             }
         }
         return result;
