@@ -1,7 +1,7 @@
 package ru.job4j.array;
 
 /**
- * Class  Массив заполнен true или false[#91019].
+ * Class  6.5. Создать программу для сортировки массива методом перестановки.[#91021]
  *
  * @author Ayder Khayredinov (emage.haf@gmail.com).
  * @version 1.
