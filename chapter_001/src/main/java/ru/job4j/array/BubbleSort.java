@@ -17,9 +17,11 @@ public class BubbleSort {
      */
     public int[] sort(int[] array) {
         boolean simple = true;
+        int x = array.length;
         while (simple) {
             simple = false;
-            for (int index = 0; index < array.length - 1; index++) {
+            int y = 0;
+            for (int index = 0; index < x - 1; index++) {
                 if (array[index] > array[index + 1]) {
                     int temp = array[index + 1];
                     array[index + 1] = array[index];
@@ -27,6 +29,7 @@ public class BubbleSort {
                     simple = true;
                 }
             }
+            x--;
         }
         return array;
     }
