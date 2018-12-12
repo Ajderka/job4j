@@ -1,14 +1,30 @@
 package ru.job4j.array;
 
+/**
+ * Class  Массив заполнен true или false[#91019].
+ *
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 12.12.2018.
+ */
 public class BubbleSort {
+
+    /**
+     * method sort - должен сортировать массив целых чисел, используя алгоритм сортировки пузырьком.
+     *
+     * @param array массив не сортированный.
+     * @return сортированный массив.
+     */
     public int[] sort(int[] array) {
-        for (int curciut = array.length - 1; curciut == 0; curciut--) {
+        boolean simple = true;
+        while (simple) {
+            simple = false;
             for (int index = 0; index < array.length - 1; index++) {
                 if (array[index] > array[index + 1]) {
                     int temp = array[index + 1];
                     array[index + 1] = array[index];
                     array[index] = temp;
-
+                    simple = true;
                 }
             }
         }
