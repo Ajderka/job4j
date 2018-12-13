@@ -17,15 +17,9 @@ public class MatrixCheck {
      */
     public boolean mono(boolean[][] data) {
         boolean result = true;
-        for (int height1 = 0, width1 = 0; width1 < data.length - 1; width1++, height1++) {
-            if (data[height1][width1] != data[height1 + 1][width1 + 1]) {
-                result = false;
-                break;
-            }
-        }
-
-        for (int height2 = 0, width2 = data.length - 1; width2 > 0; width2--, height2++) {
-            if (data[height2][width2] != data[height2 + 1][width2 - 1]) {
+        int size = data.length;
+        for (int height = 0, width = 0; width < size - 1; width++, height++) {
+            if (data[height][width] != data[height + 1][width + 1] || data[height][(size - 1) - width] != data[height + 1][(size - 2) - width]) {
                 result = false;
                 break;
             }
