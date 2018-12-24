@@ -85,18 +85,12 @@ public class Logic {
                     result = true;
                     break;
                 }
-            }
-            if (convertRow == 0) {
-                for (int cell = 0; cell != table.length; cell++) {
-                    for (int row = 0; row != table.length - 1; row++) {
-                        if (table[row][cell] != 0 && table[row][cell] == table[row + 1][cell]) {
-                            numberOfCoincidencesC += 1;
-                        }
-                        if (numberOfCoincidencesC == table.length - 1) {
-                            result = true;
-                            break;
-                        }
-                    }
+                if (table[convertCell][convertRow] != 0 && table[convertCell][convertRow] == table[convertCell + 1][convertRow]) {
+                    numberOfCoincidencesC += 1;
+                }
+                if (numberOfCoincidencesC == table.length - 1) {
+                    result = true;
+                    break;
                 }
             }
         }
