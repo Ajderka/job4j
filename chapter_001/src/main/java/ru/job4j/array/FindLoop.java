@@ -17,7 +17,7 @@ public class FindLoop {
      * @return индекс массива под которым находится это число.
      */
     public int indexOf(int[] data, int el) {
-        int rst = -1; // если элемента нет в массиве, то возвращаем -1.
+        int rst = -1;
         for (int index = 0; index != el; index++) {
             if (data[index] == el) {
                 rst = index;

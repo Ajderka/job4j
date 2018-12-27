@@ -21,24 +21,19 @@ public class ArraySort {
         int size1 = array1.length, size2 = array2.length;
         int size3 = size1 + size2;
         int[] array3 = new int[size1 + size2];
-
         for (int index3 = 0; index3 < size3; index3++) {
-
             if (index1 > size1 - 1) {
                 int tempo = array2[index2];
                 array3[index3] = tempo;
                 index2++;
-
             } else if (index2 > size2 - 1) {
                 int tempo = array1[index1];
                 array3[index3] = tempo;
                 index1++;
-
             } else if (array1[index1] < array2[index2]) {
                 int tempo = array1[index1];
                 array3[index3] = tempo;
                 index1++;
-
             } else {
                 int temp = array2[index2];
                 array3[index3] = temp;

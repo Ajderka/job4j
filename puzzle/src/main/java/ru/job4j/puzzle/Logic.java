@@ -74,21 +74,21 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
-        int numberOfCoincidencesR = 0;
-        int numberOfCoincidencesC = 0;
-        for (int convertRow = 0; convertRow != table.length; convertRow++) {
-            for (int convertCell = 0; convertCell != table.length - 1; convertCell++) {
-                if (table[convertRow][convertCell] != 0 && table[convertRow][convertCell] == table[convertRow][convertCell + 1]) {
-                    numberOfCoincidencesR += 1;
+        int coincidencesX = 0;
+        int coincidencesY = 0;
+        for (int row = 0; row != table.length; row++) {
+            for (int cell = 0; cell != table.length - 1; cell++) {
+                if (table[row][cell] != 0 && table[row][cell] == table[row][cell + 1]) {
+                    coincidencesX += 1;
                 }
-                if (numberOfCoincidencesR == table.length - 1) {
+                if (coincidencesX == table.length - 1) {
                     result = true;
                     break;
                 }
-                if (table[convertCell][convertRow] != 0 && table[convertCell][convertRow] == table[convertCell + 1][convertRow]) {
-                    numberOfCoincidencesC += 1;
+                if (table[cell][row] != 0 && table[cell][row] == table[cell + 1][row]) {
+                    coincidencesY += 1;
                 }
-                if (numberOfCoincidencesC == table.length - 1) {
+                if (coincidencesY == table.length - 1) {
                     result = true;
                     break;
                 }
