@@ -1,8 +1,15 @@
-package ru.job4j.Simple;
+package ru.job4j.simple;
 
+/**
+ * Class Building - построенный объект по проекту House.
+ *
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 30.12.2018.
+ */
 public class Building {
-    public String adress;
-    public String description;
+    private String adress;
+    private String description;
 
     public String getAdress() {
         return this.adress;

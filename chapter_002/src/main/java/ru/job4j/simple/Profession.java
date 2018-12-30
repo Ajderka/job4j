@@ -1,8 +1,15 @@
-package ru.job4j.Simple;
+package ru.job4j.simple;
 
+/**
+ * Class  Профессии, родительский класс. 1. Реализация профессий в коде[#91091]
+ *
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 30.12.2018.
+ */
 public class Profession {
-    public String name;
-    public String profession;
+    private String name;
+    private String profession;
 
     public String getName() {
         return this.name;

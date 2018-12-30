@@ -1,9 +1,16 @@
-package ru.job4j.Simple;
+package ru.job4j.simple;
 
+/**
+ * Class Diagnose - поставленный диагноз пациенту на приеме у доктора.
+ *
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 30.12.2018.
+ */
 public class Diagnose {
-    public String name;
-    public String description;
-    public String recomendation;
+    private String name;
+    private String description;
+    private String recomendation;
 
     public String getName() {
         return this.name;
