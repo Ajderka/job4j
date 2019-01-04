@@ -53,9 +53,9 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
+        for (int index = 0; index < this.position; index++) {
+            if (this.items[index] != null && this.items[index].getId().equals(id)) {
+                result = this.items[index];
                 break;
             }
         }
@@ -74,6 +74,7 @@ public class Tracker {
         for (int index = 0; index < this.position; index++) {
             if (this.items[index].getId().equals(id)) {
                 this.items[index] = newItem;
+                this.items[index].setId(id);
                 result = true;
                 break;
             }
@@ -106,9 +107,7 @@ public class Tracker {
      * @return заполненные ячейки.
      */
     public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        System.arraycopy(this.items, 0, result, 0, this.position);
-        return result;
+        return Arrays.copyOf(this.items, this.position);
     }
 
     /**

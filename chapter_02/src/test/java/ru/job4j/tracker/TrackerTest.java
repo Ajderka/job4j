@@ -100,7 +100,7 @@ public class TrackerTest {
         Item next = new Item("test2", "testDescription2", 1234L);
         next.setId(previous.getId());
         tracker.replace(previous.getId(), next);
-        assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
+        assertThat(tracker.findById(previous.getId()), is(next));
         assertThat(tracker.replace(previous.getId(), next), is(true));
     }
 }
