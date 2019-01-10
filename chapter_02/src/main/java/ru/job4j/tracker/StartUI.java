@@ -91,7 +91,7 @@ public class StartUI {
     }
 
     /**
-     * Метод реализует удаление заявок.
+     * Метод реализует поиск заявок по полю name.
      */
     private void findByName() {
         System.out.println("------------ Поиск заявки по Name :  --------------");
@@ -116,7 +116,6 @@ public class StartUI {
     private void delete() {
         System.out.println("------------ Удаление заявки по id :  --------------");
         String id = this.input.ask("Введите id заявки которую нужно удалить :");
-        this.tracker.delete(id);
         if (this.tracker.delete(id)) {
             System.out.println("------------ Заявка была удалена по id :  --------------");
         }
@@ -131,7 +130,9 @@ public class StartUI {
         String name = this.input.ask("Введите имя новой заявки :");
         String description = this.input.ask("Введите описание новой заявки :");
         Item item = new Item(name, description);
-        this.tracker.replace(id, item);
+        if(this.tracker.replace(id, item)) {
+            System.out.println("------------ Заявка была заменена :  --------------");
+        }
     }
 
     /**
