@@ -130,7 +130,7 @@ public class StartUI {
         String name = this.input.ask("Введите имя новой заявки :");
         String description = this.input.ask("Введите описание новой заявки :");
         Item item = new Item(name, description);
-        if(this.tracker.replace(id, item)) {
+        if (this.tracker.replace(id, item)) {
             System.out.println("------------ Заявка была заменена :  --------------");
         }
     }
