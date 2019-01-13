@@ -4,8 +4,11 @@ package ru.job4j.tracker;
 import java.util.Arrays;
 
 /**
- * @version $Id$
- * @since 0.1
+ * Class  StartUI.
+ *
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 13.01.2019.
  */
 public class StartUI {
     /**
