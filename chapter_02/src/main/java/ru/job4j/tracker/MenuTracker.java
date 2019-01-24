@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class  MenuTracker.
+ *
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 25.01.2019.
+ */
 public class MenuTracker {
 
     /**
@@ -19,7 +26,7 @@ public class MenuTracker {
     /**
      * @param хранит ссылку на массив типа UserAction.
      */
-    private List<UserAction> actions = new ArrayList<>(5);
+    private List<UserAction> actions = new ArrayList<>();
 
     /**
      * Конструктор.

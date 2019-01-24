@@ -1,5 +1,12 @@
 package ru.job4j.tracker;
 
+/**
+ * Interface UserAction .
+ *
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 25.01.2019.
+ */
 public interface UserAction {
 
     /**

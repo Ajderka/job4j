@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import java.util.List;
 
 /**
- * Class  Item.
+ * Class  Input.
  *
  * @author Ayder Khayredinov (emage.haf@gmail.com).
  * @version 1.
@@ -14,4 +14,5 @@ public interface Input {
     String ask(String question);
 
     int ask(String question, List<Integer> range);
+    
 }
