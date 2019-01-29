@@ -9,23 +9,31 @@ import java.util.List;
  * @version 1.
  * @since 25.01.2019.
  */
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
 
-    /**
-     * Метод реализует возможность ошибки пользователя в текстовое сообщение.
-     */
+    private final Input input;
+
+    public ValidateInput(final Input input) {
+        this.input = input;
+    }
+
     @Override
-    public int ask(String questions, List<Integer> range) {
+    public String ask(String question) {
+        return this.input.ask(question);
+    }
+
+    @Override
+    public int ask(String question, List<Integer> range) {
         boolean invalid = true;
         int value = -1;
         do {
             try {
-                value = super.ask(questions, range);
+                value = this.input.ask(question, range);
                 invalid = false;
             } catch (MenuOutExceptoin moe) {
-                System.out.println("Please select key from menu");
+                System.out.println("Please select key from menu.");
             } catch (NumberFormatException nfe) {
-                System.out.println("Please enter valuable data again");
+                System.out.println("Please enter validate data again.");
             }
         } while (invalid);
         return value;
