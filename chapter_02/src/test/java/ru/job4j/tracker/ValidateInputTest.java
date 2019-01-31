@@ -34,11 +34,25 @@ public class ValidateInputTest {
         System.setOut(this.out);
     }
 
+    /**
+     * Test проверяющий нличие определенной ошибки.
+     */
     @Test
     public void whenInvalidInput() {
         ValidateInput input = new ValidateInput(new StubInput(new String[]{"invalid", "1"}));
         range.add(1);
         input.ask("Enter", range);
         assertThat(this.mem.toString(), is(String.format("Please enter validate data again.%n")));
+    }
+
+    /**
+     * Test проверяющий нличие определенной ошибки.
+     */
+    @Test
+    public void whenInvalidSelectKeyMenu() {
+        ValidateInput input = new ValidateInput(new StubInput(new String[]{"10", "1"}));
+        range.add(1);
+        input.ask("Enter", range);
+        assertThat(this.mem.toString(), is(String.format("Please select key from menu.%n")));
     }
 }

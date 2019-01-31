@@ -29,8 +29,8 @@ public class ConsoleInput implements Input {
      * Перегружаем метод ask.
      */
     @Override
-    public int ask(String questions, List<Integer> range) {
-        int key = Integer.valueOf(this.ask(questions));
+    public int ask(String question, List<Integer> range) {
+        int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int value : range) {
             if (value == key) {
