@@ -16,6 +16,7 @@
 	<modules>
 		<module>chapter_001</module>
 		<module>puzzle</module>
+		<module>chess</module>
         <module>chapter_02</module>
 	</modules>
 
