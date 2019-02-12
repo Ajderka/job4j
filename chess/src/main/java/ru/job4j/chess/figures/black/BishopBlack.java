@@ -2,6 +2,7 @@ package ru.job4j.chess.figures.black;
 
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.Figure;
+import ru.job4j.chess.exception.ImpossibleMoveException;
 
 /**
  * @author Petr Arsentev (parsentev@yandex.ru)
@@ -21,14 +22,14 @@ public class BishopBlack implements Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException{
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
 
         int size = Math.abs(dest.x - source.x);
         Cell[] steps = new Cell[size];
         int deltaX = (dest.x - source.x) < 0 ? -1 : 1;
         int deltaY = (dest.y - source.y) < 0 ? -1 : 1;
         if (!isDiagonal(source, dest)) {
-            throw new ImpossibleMoveException("слон может ходить только по диагонали");
+            throw new ImpossibleMoveException(this.getClass().getSimpleName());
         }
         for (int index = 0; index < size; index++) {
             steps[index] = Cell.values()[(source.x + deltaX * (index + 1)) * 8 + (source.y + deltaY * (index + 1))];
