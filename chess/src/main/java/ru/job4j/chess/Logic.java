@@ -6,6 +6,13 @@ import ru.job4j.chess.exception.OccupiedWayException;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.Figure;
 
+/**
+ * Class Logic.
+ *
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 18.02.2019.
+ */
 public class Logic {
     private final Figure[] figures = new Figure[32];
     private int index = 0;
@@ -14,11 +21,16 @@ public class Logic {
         this.figures[this.index++] = figure;
     }
 
-    public boolean move(Cell source, Cell dest)  {
+    /**
+     * Method move - определяет возможность хода фигуры.
+     *
+     * @return true если фигура найдена и ей ничего не мешает.
+     */
+    public boolean move(Cell source, Cell dest) throws FigureNotFoundException, OccupiedWayException, ImpossibleMoveException {
         boolean rst = false;
         int index = this.findBy(source);
         if (index == -1) {
-            throw new FigureNotFoundException("Фигурой топчитесь на месте");
+            throw new FigureNotFoundException("Фигура не найдена");
         }
         Cell[] steps = this.figures[index].way(source, dest);
         if (!this.isFree(steps)) {
