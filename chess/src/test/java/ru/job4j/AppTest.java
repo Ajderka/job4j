@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
  * Test.
  *
  * @author Ayder Khayredinov (emage.haf@gmail.com).
- * @version 1.
+ * @version 2.
  * @since 18.02.2019.
  */
 public class AppTest {
