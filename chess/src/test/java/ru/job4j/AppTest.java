@@ -41,7 +41,7 @@ public class AppTest {
         logic.add(new RookBlack(Cell.A8));
         logic.add(new KnightBlack(Cell.B8));
         logic.add(new BishopBlack(Cell.C8));
-        logic.add(new QeenBlack(Cell.D8));
+        logic.add(new QueenBlack(Cell.D8));
         logic.add(new KingBlack(Cell.E8));
         logic.add(new BishopBlack(Cell.F8));
         logic.add(new KnightBlack(Cell.G8));
@@ -57,7 +57,7 @@ public class AppTest {
         logic.add(new RookWhite(Cell.A1));
         logic.add(new KnightWhite(Cell.B1));
         logic.add(new BishopWhite(Cell.C1));
-        logic.add(new QeenWhite(Cell.D1));
+        logic.add(new QueenWhite(Cell.D1));
         logic.add(new KingWhite(Cell.E1));
         logic.add(new BishopWhite(Cell.F1));
         logic.add(new KnightWhite(Cell.G1));
@@ -68,7 +68,7 @@ public class AppTest {
      * Test проверяет логику.
      */
     @Test
-    public void testlogicWhenPawnBlack() {
+    public void testLogicWhenPawnBlack() {
         this.fillWithFigures(this.logicFigures);
         boolean actual = logicFigures.move(Cell.B7, Cell.B6);
         assertThat(actual, is(true));
@@ -123,7 +123,7 @@ public class AppTest {
      */
     @Test
     public void testQueen() {
-        QeenBlack queen = new QeenBlack(Cell.E8);
+        QueenBlack queen = new QueenBlack(Cell.E8);
         Cell[] actual = queen.way(queen.position(), Cell.E1);
         Cell[] expected = {Cell.E7, Cell.E6, Cell.E5, Cell.E4, Cell.E3, Cell.E2, Cell.E1};
         assertThat(actual, is(expected));
