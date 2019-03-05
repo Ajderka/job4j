@@ -15,24 +15,24 @@ public class CoffeeMachineTest {
 
     @Test
     public void putOnCoffeeMachineFiftyRub() {
-        CoffeeMachine coffee = new CoffeeMachine(50, 35);
-        int[] result = coffee.coffeeMachine();
+        CoffeeMachine coffee = new CoffeeMachine();
+        int[] result = coffee.change(50,35);
         int[] expect = new int[]{10, 5};
         assertThat(result, is(expect));
     }
 
     @Test
     public void putOnCoffeeMachineOneHundredRub() {
-        CoffeeMachine coffee = new CoffeeMachine(100, 35);
-        int[] result = coffee.coffeeMachine();
+        CoffeeMachine coffee = new CoffeeMachine();
+        int[] result = coffee.change(100,35);
         int[] expect = new int[]{10, 10, 10, 10, 10, 10, 5};
         assertThat(result, is(expect));
     }
 
     @Test
     public void putOnCoffeeMachineOneHundredTwentyThreeRub() {
-        CoffeeMachine coffee = new CoffeeMachine(123, 37);
-        int[] result = coffee.coffeeMachine();
+        CoffeeMachine coffee = new CoffeeMachine();
+        int[] result = coffee.change(123,37);
         int[] expect = new int[]{10, 10, 10, 10, 10, 10, 10, 10, 5, 1};
         assertThat(result, is(expect));
     }
