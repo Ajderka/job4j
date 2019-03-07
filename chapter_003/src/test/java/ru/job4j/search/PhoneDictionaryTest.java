@@ -7,13 +7,13 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
  * @version $Id$
  * @since 06.03.2019.
  */
 public class PhoneDictionaryTest {
+
     @Test
     public void whenFindByName() {
         PhoneDictionary phones = new PhoneDictionary();
