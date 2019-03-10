@@ -9,8 +9,8 @@ import static org.junit.Assert.assertThat;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
- * @version $Id$
- * @since 06.03.2019.
+ * @version 1.
+ * @since 09.03.2019.
  */
 public class PhoneDictionaryTest {
 
