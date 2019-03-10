@@ -7,6 +7,11 @@ import java.util.Arrays;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 10.03.2019.
+ */
 public class ConvertList2ArrayTest {
 
     @Test
