@@ -9,7 +9,7 @@ import java.util.List;
  * @since 06.03.2019.
  */
 public class PhoneDictionary {
-    private List<Person> persons = new ArrayList<Person>();
+    private List<Person> persons = new ArrayList<>();
 
     public void add(Person person) {
         this.persons.add(person);
@@ -22,7 +22,7 @@ public class PhoneDictionary {
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-        List<Person> result = new ArrayList<Person>();
+        List<Person> result = new ArrayList<>();
         for (Person value : persons) {
             if (value.getName() != null && value.getName().contains(key)) {
                 result.add(value);

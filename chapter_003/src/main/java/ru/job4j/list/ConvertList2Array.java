@@ -1,11 +1,12 @@
 package ru.job4j.list;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
- * @version 1.
- * @since 10.03.2019.
+ * @version 2.
+ * @since 12.03.2019.
  */
 public class ConvertList2Array {
 
@@ -30,5 +31,21 @@ public class ConvertList2Array {
             array[row][cell++] = i;
         }
         return array;
+    }
+
+    /**
+     * Метод принимает список значений и преобразует их в двумерный массив.
+     *
+     * @param list входящий список массивов.
+     * @return Список типа Integer.
+     */
+    public List<Integer> convert(List<int[]> list) {
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int[] i : list) {
+            for (int j : i) {
+                result.add(j);
+            }
+        }
+        return result;
     }
 }

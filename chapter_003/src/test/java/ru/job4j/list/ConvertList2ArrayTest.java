@@ -3,14 +3,15 @@ package ru.job4j.list;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
- * @version 1.
- * @since 10.03.2019.
+ * @version 2.
+ * @since 12.03.2019.
  */
 public class ConvertList2ArrayTest {
 
@@ -44,5 +45,18 @@ public class ConvertList2ArrayTest {
                 {9, 0}
         };
         assertThat(result, is(expect));
+    }
+
+    @Test
+    public void whenListOfTwoArraysThenConvertToOneList() {
+        ConvertList2Array list = new ConvertList2Array();
+        List<int[]> input = Arrays.asList(
+                new int[]{1, 2, 3},
+                new int[]{4, 5, 6, 7}
+        );
+        List<Integer> expected = Arrays.asList(
+                1, 2, 3, 4, 5, 6, 7
+        );
+        assertThat(list.convert(input), is(expected));
     }
 }
