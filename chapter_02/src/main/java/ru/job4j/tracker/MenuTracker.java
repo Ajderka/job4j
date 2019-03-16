@@ -115,7 +115,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ All items here --------------");
-            System.out.println(Arrays.toString(tracker.findAll()));
+            System.out.println(tracker.findAll());
         }
     }
 
@@ -190,7 +190,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Find item by id--------------");
             String name = input.ask("Please, provide item name:");
-            System.out.println("------------ Found Item : \n" + Arrays.toString(tracker.findByName(name)));
+            System.out.println("------------ Found Item : \n" + tracker.findByName(name));
         }
     }
 
