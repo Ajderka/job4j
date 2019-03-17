@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -21,7 +22,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final ArrayList<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
 
     /**
      * Указатель ячейки для новой заявки.
@@ -74,10 +75,10 @@ public class Tracker {
      */
     public boolean replace(String id, Item newItem) {
         boolean result = false;
-        for (Item item : items) {
-            if (item.getId().equals(id)) {
-                this.items.set(items.indexOf(item), newItem);
-                item.setId(id);
+        for (int index = 0; index < this.items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
+                this.items.set(index, newItem);
+                this.items.get(index).setId(id);
                 result = true;
                 break;
             }
@@ -108,7 +109,7 @@ public class Tracker {
      *
      * @return заполненные ячейки.
      */
-    public ArrayList<Item> findAll() {
+    public List<Item> findAll() {
         return items;
     }
 
@@ -118,8 +119,8 @@ public class Tracker {
      * @param key - имя.
      * @return найденная ячейка.
      */
-    public ArrayList<Item> findByName(String key) {
-        ArrayList<Item> listOfNames = new ArrayList<>();
+    public List<Item> findByName(String key) {
+        List<Item> listOfNames = new ArrayList<>();
         for (Item item : items) {
             if (item.getName().equals(key)) {
                 listOfNames.add(item);
