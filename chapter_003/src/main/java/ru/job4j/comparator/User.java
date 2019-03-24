@@ -5,7 +5,7 @@ package ru.job4j.comparator;
  * @version 1.
  * @since 16.03.2019.
  */
-public class User implements Comparable<User> {
+public class User {
 
     private String name;
     private Integer age;
@@ -17,6 +17,10 @@ public class User implements Comparable<User> {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getLengthName() {
+        return name.toCharArray().length;
     }
 
     public void setName(String name) {
@@ -31,8 +35,4 @@ public class User implements Comparable<User> {
         this.age = age;
     }
 
-    @Override
-    public int compareTo(User o) {
-        return this.age.compareTo(o.age);
-    }
 }
