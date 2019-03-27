@@ -1,11 +1,6 @@
-package ru.job4j.comparator;
+package ru.job4j.sort;
 
-/**
- * @author Ayder Khayredinov (emage.haf@gmail.com).
- * @version 1.
- * @since 16.03.2019.
- */
-public class User {
+public class User implements Comparable<User> {
 
     private String name;
     private Integer age;
@@ -33,5 +28,10 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.age.compareTo(o.age);
     }
 }

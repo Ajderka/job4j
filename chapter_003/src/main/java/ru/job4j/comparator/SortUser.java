@@ -11,16 +11,6 @@ import java.util.*;
 public class SortUser {
 
     /**
-     * Метод сортирует список users по годам.
-     *
-     * @param users входящий неотсортированный список users.
-     * @return сортированный список users.
-     */
-    public Set<User> sort(List<User> users) {
-        return new TreeSet<>(users);
-    }
-
-    /**
      * Метод сортирует список по количеству символов в имени.
      *
      * @param users входящий не отсортированный список users.
