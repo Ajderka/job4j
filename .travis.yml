@@ -1,0 +1,18 @@
+language: java
+jdk:
+  openjdk11
+sudo: false
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    recipients:
+      - emage.haf@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
+
+env:
+  global:
+    - CODECOV_TOKEN="83d81bc1-8744-4386-9ded-efb8f81aaae6"
