@@ -31,6 +31,6 @@ public class SortUserTest {
                 new User("Kostya", 35),
                 new User("Ajderka", 37)
         );
-        assertThat(user.sort(users), is(expected)); //фигня какаято добавь для юзера компаратор
+        assertThat(user.sort(users), is(expected));
     }
 }

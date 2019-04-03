@@ -7,10 +7,6 @@ import java.util.*;
 //нет JavaDoc
 public class Sorter {
 
-    public Sorter() { //Этот конструктор не нужен, он вызывается по дефолту.
-
-    }
-
     //нет JavaDoc
     //идентификатор доступа public отсутствует
     Set<User> sort(List<User> list) {

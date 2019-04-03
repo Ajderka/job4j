@@ -1,28 +1,38 @@
 package ru.job4j.peerReview;
 
+import java.util.Objects;
 
-//нет JavaDoc
+/**
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 03.04.2019.
+ */
 public class Account {
-    // отсутствует модификатор доступа private.
-    double values;
-    String reqs; //я бы поменял название переменной на requisites.
+
+    private double values;
+    private String requisites;
 
     public Account(double values, String requisites) {
         this.values = values;
-        this.reqs = requisites;
+        this.requisites = requisites;
     }
 
     public double getValues() {
         return this.values;
     }
 
-    public String getReqs() {
-        return this.reqs;
+    public String getRequisites() {
+        return this.requisites;
     }
 
-    //нет JavaDoc
-    //отутствует идентификатор доступа public
-    boolean transfer(Account destination, double amount) {
+    /**
+     * Метод осуществляет перевод указанного количества средств на указанный счет.
+     *
+     * @param destination счет на который переводятся деньги.
+     * @param amount      количество средств.
+     * @return true если перевод обработан.
+     */
+    public boolean transfer(Account destination, double amount) {
         boolean success = false;
         if (amount > 0 && amount < this.values && destination != null) {
             success = true;
@@ -32,29 +42,24 @@ public class Account {
         return success;
     }
 
-    //отсутствует @Override
+    @Override
     public String toString() {
-        String otvet;
-        otvet = "Account{" + "values=" + values + ", reqs='" + reqs + "\\" + "}";
-        return otvet;
+        String result;
+        result = "Account{" + "values=" + values + ", requisites='" + requisites + "\\" + "}";
+        return result;
     }
 
-    //отсутствует @Override
+    @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-
-        return this.reqs.equals(account.reqs);
+        return (values == this.values)
+                && (requisites != null && requisites.equals(account.requisites));
     }
 
-    //отсутствует @Override
+    @Override
     public int hashCode() {
-        return this.reqs.hashCode();
+        return Objects.hash(values, requisites);
     }
 }
