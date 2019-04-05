@@ -1,4 +1,7 @@
-package ru.job4j.peerReview;
+package ru.job4j.bank;
+
+import ru.job4j.bank.Exception.NoSuchUserAccount;
+import ru.job4j.bank.Exception.NoSuchUserException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +10,8 @@ import java.util.TreeMap;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
- * @version 1.
- * @since 03.04.2019.
+ * @version 2.
+ * @since 05.04.2019.
  */
 public class Bank {
 
@@ -38,12 +41,15 @@ public class Bank {
      * @param passport поле объекта User.
      * @return ссылка на объект типо User.
      */
-    private User getUser(String passport) {
+    public User getUser (String passport) throws NoSuchUserException {
         User result = null;
         for (Map.Entry<User, ArrayList<Account>> item : this.treeMap.entrySet()) {
             if (passport.equals(item.getKey().getPassport())) {
                 result = item.getKey();
             }
+        }
+        if (result == null) {
+            throw new NoSuchUserException("Пользователя с таким пасспортом не существует");
         }
         return result;
     }
@@ -76,8 +82,12 @@ public class Bank {
      * @param passport поле объекта типа User.
      * @param account  ссылка на объект типа Account.
      */
-    public void deleteAccountFromUser(String passport, Account account) {
-        this.treeMap.get(getUser(passport)).remove(account);
+    public void deleteAccountFromUser(String passport, Account account) throws NoSuchUserAccount {
+        ArrayList<Account> temp = this.treeMap.get(this.getUser(passport));
+        if(temp.indexOf(account) < 0) {
+            throw new NoSuchUserAccount("Такого счета у пользователя нет");
+        }
+        temp.remove(account);
     }
 
     /**
@@ -86,27 +96,49 @@ public class Bank {
      * @param passport поле объекта User.
      * @return список пользователей List<Account>.
      */
-    public List<Account> getUserAccounts(String passport) {
+    private List<Account> getUserAccounts(String passport) {
         return this.treeMap.get(getUser(passport));
+    }
+
+    /**
+     * Метод возвращает аккаунт по поспорту и реквизитам.
+     *
+     * @param passport   паспорт пользователя.
+     * @param requisites реквизиты аккаунта.
+     * @return ссылка на объект типо Account.
+     */
+    public Account getOneUserAccount(String passport, String requisites) throws NoSuchUserAccount {
+        List<Account> temp = this.getUserAccounts(passport);
+        Account result = null;
+        for (Account item : temp) {
+            if (requisites.equals(item.getRequisites())) {
+                result = item;
+            }
+        }
+        if(result == null) {
+            throw new NoSuchUserAccount("Такого счета у пользователя нет");
+        } else {
+            return result;
+        }
     }
 
     /**
      * Метод для перечисления денег с одного счёта на другой счёт: если счёт не найден
      * или не хватает денег на счёте srcAccount (с которого переводят) должен вернуть false.
      *
-     * @param user1    пользователь от которого перечисляются деньги.
-     * @param account1 счет пользователя с которого перечисляются деньги.\
-     * @param user2    пользователь к которому приходят деньги.
-     * @param account2 счет пользователя на который приходят деньги.
-     * @param amount   сумма транзакции.
+     * @param srcPassport   паспорт пользователя от которого перечисляются деньги.
+     * @param srcRequisite  реквизиты пользователя со счета которого перечисляются деньги.
+     * @param destPassport  паспорт пользователя к которому приходят деньги.
+     * @param destRequisite реквизиты пользователя на счет которого приходят деньги.
+     * @param amount        сумма транзакции.
      * @return true если транзакция удалась.
      */
-    public boolean transferMoney(User user1, Account account1,
-                                 User user2, Account account2, double amount) {
-        return this.treeMap.get(user1).contains(account1)
-                && this.treeMap.get(user2).contains(account2)
-                && getActualAccount(user1, account1).transfer(
-                getActualAccount(user2, account2), amount);
+    public boolean transferMoney(String srcPassport, String srcRequisite,
+                                 String destPassport, String destRequisite, double amount) {
+        return this.treeMap.get(getUser(srcPassport)).contains(getOneUserAccount(srcPassport, srcRequisite))
+                && this.treeMap.get(getUser(destPassport)).contains(getOneUserAccount(destPassport, destRequisite))
+                && getActualAccount(getUser(srcPassport), getOneUserAccount(srcPassport, srcRequisite)).transfer(
+                getActualAccount(getUser(destPassport), getOneUserAccount(destPassport, destRequisite)), amount);
     }
 
     @Override

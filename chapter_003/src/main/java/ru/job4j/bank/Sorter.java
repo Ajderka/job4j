@@ -1,4 +1,4 @@
-package ru.job4j.peerReview;
+package ru.job4j.bank;
 
 import ru.job4j.comparator.User;
 

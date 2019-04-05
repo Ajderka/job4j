@@ -1,4 +1,4 @@
-package ru.job4j.peerReview;
+package ru.job4j.bank;
 
 import java.util.Objects;
 
@@ -7,7 +7,7 @@ import java.util.Objects;
  * @version 1.
  * @since 03.04.2019.
  */
-public class User {
+public class User implements Comparable<User>{
 
     private String name;
     private String passport;
@@ -46,5 +46,11 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(name, passport);
+    }
+
+    @Override
+    public int compareTo(User user) {
+        int temp = this.name.compareTo(user.name);
+        return temp == 0 ? this.passport.compareTo(user.passport) : temp;
     }
 }
