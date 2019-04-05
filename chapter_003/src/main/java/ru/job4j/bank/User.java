@@ -7,7 +7,7 @@ import java.util.Objects;
  * @version 1.
  * @since 03.04.2019.
  */
-public class User implements Comparable<User>{
+public class User implements Comparable<User> {
 
     private String name;
     private String passport;

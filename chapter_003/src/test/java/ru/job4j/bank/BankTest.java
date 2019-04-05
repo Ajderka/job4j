@@ -23,7 +23,7 @@ public class BankTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void whenAddThreeUserAndDeleteOne () {
+    public void whenAddThreeUserAndDeleteOne() {
         Bank bank = new Bank();
         bank.addUser(new User("Stepan", "343333"));
         bank.addUser(new User("Ivan", "245511"));
@@ -33,7 +33,7 @@ public class BankTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void whenAddThreeUserAndCantFindUser () {
+    public void whenAddThreeUserAndCantFindUser() {
         Bank bank = new Bank();
         bank.addUser(new User("Stepan", "343333"));
         bank.addUser(new User("Ivan", "245511"));
@@ -51,14 +51,14 @@ public class BankTest {
         assertThat(bank.getOneUserAccount("245511", "qwerty"), is(expected));
     }
 
-    @Test (expected = NoSuchUserAccount.class)
+    @Test(expected = NoSuchUserAccount.class)
     public void whenDeleteAccountFromUser() {
         Bank bank = new Bank();
         bank.addUser(new User("Stepan", "343333"));
         bank.addUser(new User("Ivan", "245511"));
         bank.addAccountToUser("245511", new Account(1000, "qwerty"));
         bank.addAccountToUser("245511", new Account(100, "asd"));
-        bank.deleteAccountFromUser("245511",bank.getOneUserAccount("245511","asd"));
+        bank.deleteAccountFromUser("245511", bank.getOneUserAccount("245511", "asd"));
         bank.getOneUserAccount("245511", "asd");
     }
 
@@ -80,7 +80,7 @@ public class BankTest {
         bank.addUser(new User("Ivan", "245511"));
         bank.addAccountToUser("245511", new Account(1000, "qwerty"));
         bank.addAccountToUser("343333", new Account(100, "asd"));
-        assertTrue(bank.transferMoney("343333","asd","245511","qwerty",50));
+        assertTrue(bank.transferMoney("343333", "asd", "245511", "qwerty", 50));
     }
 
     @Test
@@ -90,6 +90,6 @@ public class BankTest {
         bank.addUser(new User("Ivan", "245511"));
         bank.addAccountToUser("245511", new Account(1000, "qwerty"));
         bank.addAccountToUser("343333", new Account(100, "asd"));
-        assertFalse(bank.transferMoney("343333","asd","245511","qwerty",500));
+        assertFalse(bank.transferMoney("343333", "asd", "245511", "qwerty", 500));
     }
 }

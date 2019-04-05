@@ -41,7 +41,7 @@ public class Bank {
      * @param passport поле объекта User.
      * @return ссылка на объект типо User.
      */
-    public User getUser (String passport) throws NoSuchUserException {
+    public User getUser(String passport) throws NoSuchUserException {
         User result = null;
         for (Map.Entry<User, ArrayList<Account>> item : this.treeMap.entrySet()) {
             if (passport.equals(item.getKey().getPassport())) {
@@ -84,7 +84,7 @@ public class Bank {
      */
     public void deleteAccountFromUser(String passport, Account account) throws NoSuchUserAccount {
         ArrayList<Account> temp = this.treeMap.get(this.getUser(passport));
-        if(temp.indexOf(account) < 0) {
+        if (temp.indexOf(account) < 0) {
             throw new NoSuchUserAccount("Такого счета у пользователя нет");
         }
         temp.remove(account);
@@ -115,7 +115,7 @@ public class Bank {
                 result = item;
             }
         }
-        if(result == null) {
+        if (result == null) {
             throw new NoSuchUserAccount("Такого счета у пользователя нет");
         } else {
             return result;
