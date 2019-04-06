@@ -107,7 +107,7 @@ public class Bank {
      * @param requisites реквизиты аккаунта.
      * @return ссылка на объект типо Account.
      */
-    public Account getOneUserAccount(String passport, String requisites) throws NoSuchUserAccount {
+    public Account getOneUserAccount(String passport, String requisites) {
         List<Account> temp = this.getUserAccounts(passport);
         Account result = null;
         for (Account item : temp) {
@@ -115,11 +115,7 @@ public class Bank {
                 result = item;
             }
         }
-        if (result == null) {
-            throw new NoSuchUserAccount("Такого счета у пользователя нет");
-        } else {
-            return result;
-        }
+        return result;
     }
 
     /**
@@ -135,10 +131,14 @@ public class Bank {
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
-        return this.treeMap.get(getUser(srcPassport)).contains(getOneUserAccount(srcPassport, srcRequisite))
-                && this.treeMap.get(getUser(destPassport)).contains(getOneUserAccount(destPassport, destRequisite))
-                && getActualAccount(getUser(srcPassport), getOneUserAccount(srcPassport, srcRequisite)).transfer(
-                getActualAccount(getUser(destPassport), getOneUserAccount(destPassport, destRequisite)), amount);
+        boolean rst = false;
+        Account src = getOneUserAccount(srcPassport, srcRequisite);
+        Account dest = getOneUserAccount(destPassport, destRequisite);
+        if (src != null && dest != null) {
+            rst = getActualAccount(getUser(srcPassport), src).transfer(
+                    getActualAccount(getUser(destPassport), dest), amount);
+        }
+        return rst;
     }
 
     @Override

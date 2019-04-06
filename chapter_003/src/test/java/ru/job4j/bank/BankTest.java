@@ -1,7 +1,6 @@
 package ru.job4j.bank;
 
 import org.junit.Test;
-import ru.job4j.bank.Exception.NoSuchUserAccount;
 import ru.job4j.bank.Exception.NoSuchUserException;
 
 import static org.hamcrest.core.Is.is;
@@ -51,7 +50,7 @@ public class BankTest {
         assertThat(bank.getOneUserAccount("245511", "qwerty"), is(expected));
     }
 
-    @Test(expected = NoSuchUserAccount.class)
+    @Test
     public void whenDeleteAccountFromUser() {
         Bank bank = new Bank();
         bank.addUser(new User("Stepan", "343333"));
@@ -60,6 +59,7 @@ public class BankTest {
         bank.addAccountToUser("245511", new Account(100, "asd"));
         bank.deleteAccountFromUser("245511", bank.getOneUserAccount("245511", "asd"));
         bank.getOneUserAccount("245511", "asd");
+        assertNull(bank.getOneUserAccount("245511", "asd"));
     }
 
     @Test
