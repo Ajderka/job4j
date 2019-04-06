@@ -67,13 +67,13 @@ public class Bank {
     /**
      * Метод проверяет есть ли этот счет у пользователя, возвращает актуальный счет.
      *
-     * @param user    сылка на объект типа User.
-     * @param account ссылка на объект типа Account.
+     * @param user       сылка на объект типа User.
+     * @param requisites реквизиты аккаунта.
      * @return ссылка на объект типо Account.
      */
-    private Account getActualAccount(User user, Account account) {
+    private Account getActualAccount(User user, String requisites) {
         ArrayList<Account> list = this.treeMap.get(user);
-        return list.get(list.indexOf(account));
+        return list.get(list.indexOf(getOneUserAccount(user.getPassport(), requisites)));
     }
 
     /**
@@ -135,8 +135,8 @@ public class Bank {
         Account src = getOneUserAccount(srcPassport, srcRequisite);
         Account dest = getOneUserAccount(destPassport, destRequisite);
         if (src != null && dest != null) {
-            rst = getActualAccount(getUser(srcPassport), src).transfer(
-                    getActualAccount(getUser(destPassport), dest), amount);
+            rst = getActualAccount(getUser(srcPassport), srcRequisite).transfer(
+                    getActualAccount(getUser(destPassport), destRequisite), amount);
         }
         return rst;
     }
