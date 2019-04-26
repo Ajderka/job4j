@@ -19,7 +19,8 @@
 		<module>chess</module>
         <module>chapter_02</module>
 		<module>chapter_003</module>
-	</modules>
+        <module>chapter_004</module>
+    </modules>
 
 	<build>
 		<plugins>

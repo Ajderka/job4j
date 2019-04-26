@@ -1,4 +1,4 @@
-package ru.job4j.Departments;
+package ru.job4j.departments;
 
 import java.util.*;
 

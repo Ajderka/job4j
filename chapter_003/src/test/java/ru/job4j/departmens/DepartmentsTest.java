@@ -1,7 +1,7 @@
-package Departmens;
+package ru.job4j.departmens;
 
 import org.junit.Test;
-import ru.job4j.Departments.Departments;
+import ru.job4j.departments.Departments;
 
 import java.util.ArrayList;
 import java.util.List;
