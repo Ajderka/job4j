@@ -49,9 +49,9 @@ public class Item {
 
     @Override
     public String toString() {
-        return "------------ Item with Id : " + this.getId() + "\n"
-                + "------------ Item with Name : " + this.getName() + "\n"
-                + "------------ Item with Description : " + this.getDescription() + "\n"
-                + "------------ Item with Create : " + this.getCreate() + "\n" + "\n";
+        return " Id: " + this.getId() + "\n"
+                + " Name : " + this.getName() + "\n"
+                + " Description : " + this.getDescription() + "\n"
+                + " Create : " + this.getCreate();
     }
 }

@@ -28,7 +28,7 @@ public class MenuTracker {
      * @param хранит ссылку на массив типа UserAction.
      */
     private List<UserAction> actions = new ArrayList<>();
-    private final Consumer<String> output;
+    private Consumer<String> output;
 
     /**
      * Конструктор.
@@ -79,7 +79,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                output.accept(action.info());
+                System.out.println(action.info());
             }
         }
     }
@@ -117,8 +117,8 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            output.accept("------------ All items here --------------");
-            System.out.println(tracker.findAll());
+            System.out.println("------------ All items here --------------");
+            System.out.println(tracker.findAll().toString());
         }
     }
 
@@ -174,9 +174,9 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            output.accept("------------ Find item by id--------------");
+            System.out.println("------------ Find item by id--------------");
             String id = input.ask("Please, provide item id:");
-            output.accept("------------ Found Item : \n" + tracker.findById(id));
+            System.out.println("------------ Found Item : \n" + tracker.findById(id));
         }
     }
 
@@ -191,9 +191,9 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            output.accept("------------ Find item by id--------------");
+            System.out.println("------------ Find task by Name --------------");
             String name = input.ask("Please, provide item name:");
-            output.accept("------------ Found Item : \n" + tracker.findByName(name));
+            System.out.println("------------ Found Item : \n" + tracker.findByName(name));
         }
     }
 
