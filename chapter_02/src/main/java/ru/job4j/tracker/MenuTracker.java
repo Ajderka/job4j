@@ -28,7 +28,7 @@ public class MenuTracker {
      * @param хранит ссылку на массив типа UserAction.
      */
     private List<UserAction> actions = new ArrayList<>();
-    private Consumer<String> output;
+    private final Consumer<String> output;
 
     /**
      * Конструктор.
@@ -79,7 +79,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                output.accept(action.info());
             }
         }
     }
@@ -117,8 +117,8 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ All items here --------------");
-            System.out.println(tracker.findAll().toString());
+            output.accept("------------ All items here --------------");
+            output.accept(tracker.findAll().toString());
         }
     }
 
@@ -174,9 +174,9 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Find item by id--------------");
+            output.accept("------------ Find item by id--------------");
             String id = input.ask("Please, provide item id:");
-            System.out.println("------------ Found Item : \n" + tracker.findById(id));
+            output.accept("------------ Found Item : \n" + tracker.findById(id));
         }
     }
 
@@ -191,9 +191,9 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Find task by Name --------------");
+            output.accept("------------ Find task by Name --------------");
             String name = input.ask("Please, provide item name:");
-            System.out.println("------------ Found Item : \n" + tracker.findByName(name));
+            output.accept("------------ Found Item : \n" + tracker.findByName(name));
         }
     }
 
