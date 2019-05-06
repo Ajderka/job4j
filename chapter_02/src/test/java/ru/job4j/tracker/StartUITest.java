@@ -22,15 +22,16 @@ public class StartUITest {
 
     // создаем поле трекер
     private final Tracker tracker = new Tracker();
-    // поле ссылки на стандартный вывод в консоль
-    private final PrintStream stdout = System.out;
     // поле - буфер для хранения данных вывода
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    // поле ссылки на стандартный вывод в консоль
+    private PrintStream printStream = new PrintStream(out);
     // реализации паттерна стратегия для вывода данных с помощью Consumer
     private final Consumer<String> output = new Consumer<String>() {
+
         @Override
         public void accept(String s) {
-            stdout.println(s);
+            printStream.println(s);
         }
     };
 
@@ -65,7 +66,7 @@ public class StartUITest {
     @After
     //Метод реализует обратный выход в консоль
     public void backOutput() {
-        System.setOut(this.stdout);
+        System.setOut(this.printStream);
     }
 
     // метод реализует иммитацию ввода пользователя и запуск программы
@@ -136,6 +137,8 @@ public class StartUITest {
                                 .append(" Create : " + first.getCreate() + "]")
                                 .append(System.lineSeparator())
                                 .append(menu)
+                                .append("Good Bie")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
