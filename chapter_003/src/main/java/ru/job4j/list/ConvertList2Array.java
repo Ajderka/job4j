@@ -1,7 +1,9 @@
 package ru.job4j.list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
@@ -34,18 +36,12 @@ public class ConvertList2Array {
     }
 
     /**
-     * Метод принимает список значений и преобразует их в двумерный массив.
+     * Метод принимает список массивов и преобразует их в список.
      *
      * @param list входящий список массивов.
      * @return Список типа Integer.
      */
     public List<Integer> convert(List<int[]> list) {
-        ArrayList<Integer> result = new ArrayList<>();
-        for (int[] i : list) {
-            for (int j : i) {
-                result.add(j);
-            }
-        }
-        return result;
+        return list.stream().flatMapToInt(Arrays::stream).boxed().collect(Collectors.toList());
     }
 }

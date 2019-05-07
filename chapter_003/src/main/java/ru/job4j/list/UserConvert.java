@@ -1,7 +1,8 @@
 package ru.job4j.list;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
@@ -16,11 +17,7 @@ class UserConvert {
      * @param list входящий список типа User.
      * @return возвращает список Map<Integer, User>.
      */
-    public HashMap<Integer, User> process(List<User> list) {
-        HashMap<Integer, User> hm = new HashMap<>();
-        for (User i : list) {
-            hm.put(i.getId(), i);
-        }
-        return hm;
+    public Map<Integer, User> process(List<User> list) {
+        return list.stream().collect(Collectors.toMap(User::getId, user -> user));
     }
 }

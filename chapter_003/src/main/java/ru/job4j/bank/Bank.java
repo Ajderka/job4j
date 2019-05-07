@@ -3,10 +3,7 @@ package ru.job4j.bank;
 import ru.job4j.bank.Exception.NoSuchUserAccount;
 import ru.job4j.bank.Exception.NoSuchUserException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
@@ -15,7 +12,7 @@ import java.util.TreeMap;
  */
 public class Bank {
 
-    private TreeMap<User, ArrayList<Account>> treeMap = new TreeMap<>();
+    private Map<User, ArrayList<Account>> treeMap = new TreeMap<>();
 
     /**
      * Метод добавляет пользователя.
@@ -42,16 +39,13 @@ public class Bank {
      * @return ссылка на объект типо User.
      */
     public User getUser(String passport) throws NoSuchUserException {
-        User result = null;
-        for (Map.Entry<User, ArrayList<Account>> item : this.treeMap.entrySet()) {
-            if (passport.equals(item.getKey().getPassport())) {
-                result = item.getKey();
-            }
-        }
-        if (result == null) {
+        Optional<User> result = this.treeMap.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst();
+        if (result.isEmpty()) {
             throw new NoSuchUserException("Пользователя с таким пасспортом не существует");
         }
-        return result;
+        return result.get();
     }
 
     /**
