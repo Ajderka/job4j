@@ -1,7 +1,6 @@
 package ru.job4j.bank;
 
 import org.junit.Test;
-import ru.job4j.bank.Exception.NoSuchUserException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -21,23 +20,23 @@ public class BankTest {
         assertThat(bank.getUser("343333").getName(), is("Stepan"));
     }
 
-    @Test(expected = NoSuchUserException.class)
+    @Test
     public void whenAddThreeUserAndDeleteOne() {
         Bank bank = new Bank();
         bank.addUser(new User("Stepan", "343333"));
         bank.addUser(new User("Ivan", "245511"));
         bank.addUser(new User("Roman", "321678"));
         bank.deleteUser(bank.getUser("321678"));
-        bank.getUser("321678");
+        assertNull(bank.getUser("321678"));
     }
 
-    @Test(expected = NoSuchUserException.class)
+    @Test
     public void whenAddThreeUserAndCantFindUser() {
         Bank bank = new Bank();
         bank.addUser(new User("Stepan", "343333"));
         bank.addUser(new User("Ivan", "245511"));
         bank.addUser(new User("Roman", "321678"));
-        bank.getUser("111111");
+        assertNull(bank.getUser("111111"));
     }
 
     @Test

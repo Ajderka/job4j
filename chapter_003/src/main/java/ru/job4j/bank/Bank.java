@@ -43,7 +43,7 @@ public class Bank {
                 .filter(user -> user.getPassport().equals(passport))
                 .findFirst();
         if (result.isEmpty()) {
-            throw new NoSuchUserException("Пользователя с таким пасспортом не существует");
+            return null;
         }
         return result.get();
     }
