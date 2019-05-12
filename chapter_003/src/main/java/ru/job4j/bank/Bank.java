@@ -39,13 +39,9 @@ public class Bank {
      * @return ссылка на объект типо User.
      */
     public User getUser(String passport) throws NoSuchUserException {
-        Optional<User> result = this.treeMap.keySet().stream()
+        return this.treeMap.keySet().stream()
                 .filter(user -> user.getPassport().equals(passport))
-                .findFirst();
-        if (result.isEmpty()) {
-            return null;
-        }
-        return result.get();
+                .findFirst().orElse(null);
     }
 
     /**
