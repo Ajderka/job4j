@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * Class Tracker - это обертка над массивом.
@@ -57,14 +58,9 @@ public class Tracker {
      * @return item.
      */
     public Item findById(String id) {
-        Item result = null;
-        for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
-                break;
-            }
-        }
-        return result;
+        return this.items.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst().orElse(null);
     }
 
     /**
@@ -121,12 +117,9 @@ public class Tracker {
      * @return найденная ячейка.
      */
     public List<Item> findByName(String key) {
-        List<Item> listOfNames = new ArrayList<>();
-        for (Item item : items) {
-            if (item.getName().equals(key)) {
-                listOfNames.add(item);
-            }
-        }
+        List<Item> listOfNames = this.items.stream()
+                .filter(item -> item.getName().equals(key))
+                .collect(Collectors.toList());
         return listOfNames;
     }
 }
