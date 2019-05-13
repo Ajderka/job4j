@@ -55,18 +55,6 @@ public class Bank {
     }
 
     /**
-     * Метод проверяет есть ли этот счет у пользователя, возвращает актуальный счет.
-     *
-     * @param user       сылка на объект типа User.
-     * @param requisites реквизиты аккаунта.
-     * @return ссылка на объект типо Account.
-     */
-    private Account getActualAccount(User user, String requisites) {
-        ArrayList<Account> list = this.treeMap.get(user);
-        return list.get(list.indexOf(getOneUserAccount(user.getPassport(), requisites)));
-    }
-
-    /**
      * Метод удаляет счет(Account) пользователя(User).
      *
      * @param passport поле объекта типа User.
@@ -125,8 +113,7 @@ public class Bank {
         Account src = getOneUserAccount(srcPassport, srcRequisite);
         Account dest = getOneUserAccount(destPassport, destRequisite);
         if (src != null && dest != null) {
-            rst = getActualAccount(getUser(srcPassport), srcRequisite).transfer(
-                    getActualAccount(getUser(destPassport), destRequisite), amount);
+            rst = src.transfer(dest, amount);
         }
         return rst;
     }
