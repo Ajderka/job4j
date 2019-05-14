@@ -1,4 +1,4 @@
-package ru.job4j.bank.Exception;
+package ru.job4j.bank.exception;
 
 public class NoSuchUserException extends RuntimeException {
 

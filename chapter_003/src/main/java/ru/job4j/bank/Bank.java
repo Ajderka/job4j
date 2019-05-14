@@ -1,7 +1,7 @@
 package ru.job4j.bank;
 
-import ru.job4j.bank.Exception.NoSuchUserAccount;
-import ru.job4j.bank.Exception.NoSuchUserException;
+import ru.job4j.bank.exception.NoSuchUserAccount;
+import ru.job4j.bank.exception.NoSuchUserException;
 
 import java.util.*;
 
