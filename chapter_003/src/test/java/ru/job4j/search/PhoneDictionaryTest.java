@@ -1,11 +1,11 @@
 package ru.job4j.search;
 
-import org.junit.Test;
+        import org.junit.Test;
 
-import java.util.List;
+        import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+        import static org.hamcrest.core.Is.is;
+        import static org.junit.Assert.assertThat;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
