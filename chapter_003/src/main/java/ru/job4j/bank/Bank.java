@@ -14,6 +14,10 @@ public class Bank {
 
     private Map<User, ArrayList<Account>> treeMap = new TreeMap<>();
 
+    public void setTreeMap(Map<User, ArrayList<Account>> treeMap) {
+        this.treeMap = treeMap;
+    }
+
     /**
      * Метод добавляет пользователя.
      *
