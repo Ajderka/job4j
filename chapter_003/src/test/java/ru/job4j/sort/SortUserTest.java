@@ -20,13 +20,13 @@ public class SortUserTest {
     public void whenAddUserInTreeSet() {
         SortUser user = new SortUser();
 
-        List<User> users = List.of(
+        var users = List.of(
                 new User("Ajderka", 37),
                 new User("Ivanka", 33),
                 new User("Kostya", 35)
         );
 
-        Set<User> expected = Set.of(
+        var expected = Set.of(
                 new User("Ivanka", 33),
                 new User("Kostya", 35),
                 new User("Ajderka", 37)

@@ -23,7 +23,7 @@ public class PhoneDictionary {
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-        List<Person> result = this.persons.stream()
+        var result = this.persons.stream()
                 .filter(person -> person.getName().contains(key)
                         || person.getAddress().contains(key)
                         || person.getPhone().contains(key)
