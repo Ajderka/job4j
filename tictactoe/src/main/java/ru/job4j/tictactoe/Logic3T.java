@@ -47,7 +47,6 @@ public class Logic3T {
                 ;
     }
 
-    //проверяет, если ли пустые клетки для новых ходов.
     public boolean hasGap() {
         return true;
     }
