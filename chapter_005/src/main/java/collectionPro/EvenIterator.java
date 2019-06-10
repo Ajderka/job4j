@@ -42,8 +42,3 @@ public class EvenIterator implements Iterator {
         throw new UnsupportedOperationException();
     }
 }
-/*
-вы можете запомнить индекс четного числа в зэзнексте
-тогда цикл в нексте будет не нужен
-сейчас у вас дублируется логика в обоих методах
- */
