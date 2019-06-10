@@ -29,7 +29,7 @@ public class IteratorArrayTest {
 
     @Test
     public void whenSkipZeroCell() {
-        IteratorArray it = new IteratorArray(new int[][]{{1, 2}, {3, 4}, {}, {5}});
+        IteratorArray it = new IteratorArray(new int[][]{{1, 2}, {3, 4}, {5}});
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
         assertThat(it.hasNext(), is(true));

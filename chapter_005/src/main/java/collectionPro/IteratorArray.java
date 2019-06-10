@@ -1,6 +1,7 @@
 package collectionPro;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
@@ -10,11 +11,6 @@ import java.util.Iterator;
 public class IteratorArray implements Iterator {
 
     private final int[][] values; //двумерный массив
-
-    /**
-     * позиция текущего элемента для выдачи
-     */
-    private int position = 0;
 
     /**
      * строка текущего элемента
@@ -35,22 +31,33 @@ public class IteratorArray implements Iterator {
 
     @Override
     public boolean hasNext() {
-        int count = 0;
-        for (int[] row : values) {
-            count += row.length;
+        boolean result = false;
+        if (values.length > row && values[row].length - 1 >= col) {
+            result = true;
         }
-        return count > position;
+        return result;
     }
 
     @Override
     public Object next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException("В массиве больше нет элементов");
+        }
         int cell = values[row][col];
-        position++;
-        col++;
-        while (row < values.length && col == values[row].length) {
-            col = 0;
+        if (values[row].length - 1 > col) {
+            col++;
+        } else {
             row++;
+            col = 0;
         }
         return cell;
     }
 }
+/*
+тут не должно быть циклов вообще
+у вас должно быть два индекса и массив
+в хэзнексте проверяете положение индексов относительно границ массива
+в нексте получаете значение из ячейки и сдвигаетесь на одну ячейку вперед
+если элементов нет то кидаете
+throw new NoSuchElementException();
+ */
