@@ -18,24 +18,20 @@ public class EvenIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        int countHasNext = count;
         boolean result = false;
-        while (countHasNext < massive.length) {
-            if (massive[countHasNext] % 2 == 0) {
+        while (count < massive.length) {
+            if (massive[count] % 2 == 0) {
                 result = true;
                 break;
             }
-            countHasNext++;
+            count++;
         }
         return result;
     }
 
     @Override
     public Object next() {
-        while (count < massive.length && massive[count] % 2 != 0) {
-            count++;
-        }
-        if (count >= massive.length) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
         return massive[count++];
@@ -46,3 +42,8 @@ public class EvenIterator implements Iterator {
         throw new UnsupportedOperationException();
     }
 }
+/*
+вы можете запомнить индекс четного числа в зэзнексте
+тогда цикл в нексте будет не нужен
+сейчас у вас дублируется логика в обоих методах
+ */
