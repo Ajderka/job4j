@@ -52,4 +52,9 @@ public class IteratorArray implements Iterator {
         }
         return cell;
     }
+
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
 }
