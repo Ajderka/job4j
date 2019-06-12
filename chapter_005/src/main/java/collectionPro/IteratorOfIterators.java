@@ -15,7 +15,7 @@ public class IteratorOfIterators {
      * Метод принимающий несколько итераторов и возвращающий итератор итераторов.
      *
      * @param it несколько итераторов, которые будут совмещены в один.
-     * @return Итератор итераторов.
+     * @return Итератор значений взятых последовательно из других итераторов.
      */
     Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<>() {
@@ -23,7 +23,7 @@ public class IteratorOfIterators {
 
             @Override
             public boolean hasNext() {
-                if (it.hasNext() && !iterator.hasNext()) {
+                while (it.hasNext() && !iterator.hasNext()) {
                     iterator = it.next();
                 }
                 return iterator.hasNext();
