@@ -1,4 +1,4 @@
-package collectionPro;
+package collectionPro.generic;
 
 import org.junit.Before;
 import org.junit.Test;

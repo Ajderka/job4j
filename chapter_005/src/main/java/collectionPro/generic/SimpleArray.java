@@ -1,4 +1,4 @@
-package collectionPro;
+package collectionPro.generic;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

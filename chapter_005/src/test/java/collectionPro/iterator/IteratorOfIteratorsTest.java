@@ -1,11 +1,10 @@
-package collectionPro;
+package collectionPro.iterator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import collectionPro.IteratorOfIterators;
 import org.junit.Before;
 import org.junit.Test;
 
