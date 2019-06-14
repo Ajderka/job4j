@@ -1,6 +1,5 @@
 package collectionPro;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -12,7 +11,7 @@ import java.util.NoSuchElementException;
 public class SimpleArray<T> implements Iterable<T> {
 
     private Object[] massive;
-    private int index = 0;
+    private int count = 0;
     private int size;
 
     public SimpleArray(int size) {
@@ -27,10 +26,10 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param model объект который нужно добавить.
      */
     public void add(T model) throws IndexOutOfBoundsException {
-        if (massive.length <= index) {
+        if (massive.length <= count) {
             throw new IndexOutOfBoundsException("Массив переполнен");
         }
-        this.massive[index++] = model;
+        this.massive[count++] = model;
     }
 
     /**
@@ -40,8 +39,10 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index индекс который нужно заменить.
      * @param model элемент который будет на месте замененного.
      */
+
+    // тут должна быть проверка на то что индекс в пределах добавленных элементов а не всей длины массива
     public void set(int index, T model) throws IndexOutOfBoundsException {
-        if (massive.length <= index) {
+        if (count <= index) {
             throw new IndexOutOfBoundsException("Нет такого элемента в массиве");
         }
         this.massive[index] = model;
@@ -54,11 +55,9 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param position позиция в массиве.
      * @return T объект по запросу.
      */
-    public T get(int position) throws NoSuchElementException, IndexOutOfBoundsException {
-        if (this.massive[position] == null) {
-            throw new NoSuchElementException("ячейка пуста");
-        }
-        if (massive.length <= position) {
+
+    public T get(int position) throws IndexOutOfBoundsException {
+        if (count <= position) {
             throw new IndexOutOfBoundsException("Нет такого элемента в массиве");
         }
         return (T) this.massive[position];
@@ -70,17 +69,16 @@ public class SimpleArray<T> implements Iterable<T> {
      *
      * @param cell индекс элемента который будет удален.
      */
-    public T[] remove(int cell) throws IndexOutOfBoundsException {
+
+    public void remove(int cell) throws IndexOutOfBoundsException {
         if (massive.length <= cell) {
             throw new IndexOutOfBoundsException("Нет такого элемента в массиве");
         }
-        for (int i = cell - 1; i < size - 1; i++) {
-            this.massive[i] = this.massive[i + 1];
+        if (size - cell >= 0) {
+            System.arraycopy(this.massive, cell, this.massive, cell - 1, size - cell);
+            massive[size - 1] = null;
         }
-        size--;
-        return (T[]) Arrays.copyOf(massive, size);
     }
-
 
     /**
      * Возвращает итератор для элементов в этом списке в правильной последовательности.
@@ -104,7 +102,7 @@ public class SimpleArray<T> implements Iterable<T> {
         @Override
         public boolean hasNext() {
             boolean result = false;
-            if (internalArray.length > indexPosition && internalArray[indexPosition] != null) {
+            if (count > indexPosition && internalArray[indexPosition] != null) {
                 result = true;
             }
             return result;

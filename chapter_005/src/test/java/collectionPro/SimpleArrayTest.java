@@ -50,11 +50,6 @@ public class SimpleArrayTest {
         integers.get(5);
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void tryingToGetACellWhichIsNull() {
-        integers.get(3);
-    }
-
     @Test(expected = IndexOutOfBoundsException.class)
     public void tryingToSetACellWhichIsNot() {
         integers.set(5, 10);
@@ -62,8 +57,10 @@ public class SimpleArrayTest {
 
     @Test
     public void whenDeleteItemInArray() {
-        integers.remove(1);
-        assertThat(integers.get(1), is(3));
+        integers.add(4);
+        integers.add(5);
+        integers.remove(3);
+        assertThat(integers.get(2), is(4));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
