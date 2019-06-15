@@ -102,7 +102,7 @@ public class SimpleArray<T> implements Iterable<T> {
         @Override
         public boolean hasNext() {
             boolean result = false;
-            if (count > indexPosition && internalArray[indexPosition] != null) {
+            if (count > indexPosition) {
                 result = true;
             }
             return result;
