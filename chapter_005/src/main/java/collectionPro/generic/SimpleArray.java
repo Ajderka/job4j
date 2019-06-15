@@ -40,7 +40,6 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param model элемент который будет на месте замененного.
      */
 
-    // тут должна быть проверка на то что индекс в пределах добавленных элементов а не всей длины массива
     public void set(int index, T model) throws IndexOutOfBoundsException {
         if (count <= index) {
             throw new IndexOutOfBoundsException("Нет такого элемента в массиве");
