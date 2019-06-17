@@ -16,7 +16,7 @@ public class RoleStoreTest {
 
     @Before
     public void beforeAllThings() {
-        roles = new RoleStore();
+        roles = new RoleStore(10);
         roles.add(new Role("first"));
         roles.add(new Role("second"));
         roles.add(new Role("third"));

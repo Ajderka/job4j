@@ -7,4 +7,7 @@ package collectionPro.generic;
  * @since 16.06.2019.
  */
 public class UserStore extends AbstractStore<User> {
+    public UserStore(int size) {
+        super(size);
+    }
 }

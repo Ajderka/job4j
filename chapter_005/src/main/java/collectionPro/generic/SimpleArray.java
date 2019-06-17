@@ -12,11 +12,13 @@ public class SimpleArray<T> implements Iterable<T> {
 
     private Object[] massive;
     private int count = 0;
-    private int size;
 
     public SimpleArray(int size) {
         this.massive = new Object[size];
-        this.size = size;
+    }
+
+    public int getSize() {
+        return massive.length;
     }
 
     /**
@@ -39,7 +41,6 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index индекс который нужно заменить.
      * @param model элемент который будет на месте замененного.
      */
-
     public void set(int index, T model) throws IndexOutOfBoundsException {
         if (count <= index) {
             throw new IndexOutOfBoundsException("Нет такого элемента в массиве");
@@ -54,7 +55,6 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param position позиция в массиве.
      * @return T объект по запросу.
      */
-
     public T get(int position) throws IndexOutOfBoundsException {
         if (count <= position) {
             throw new IndexOutOfBoundsException("Нет такого элемента в массиве");
@@ -68,14 +68,13 @@ public class SimpleArray<T> implements Iterable<T> {
      *
      * @param cell индекс элемента который будет удален.
      */
-
     public void remove(int cell) throws IndexOutOfBoundsException {
         if (massive.length <= cell) {
             throw new IndexOutOfBoundsException("Нет такого элемента в массиве");
         }
-        if (size - cell >= 0) {
-            System.arraycopy(this.massive, cell, this.massive, cell - 1, size - cell);
-            massive[size - 1] = null;
+        if (massive.length - cell >= 0) {
+            System.arraycopy(this.massive, cell, this.massive, cell - 1, massive.length - cell);
+            massive[massive.length - 1] = null;
         }
     }
 

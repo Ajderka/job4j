@@ -16,7 +16,7 @@ public class UserStoreTest {
 
     @Before
     public void beforeAllThings() {
-        userStore = new UserStore();
+        userStore = new UserStore(10);
         userStore.add(new User("first"));
         userStore.add(new User("second"));
         userStore.add(new User("third"));

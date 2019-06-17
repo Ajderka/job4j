@@ -6,7 +6,12 @@ package collectionPro.generic;
  * @since 16.06.2019.
  */
 public abstract class AbstractStore<T extends Base> implements Store<T> {
-    private SimpleArray<T> store = new SimpleArray<>(100);
+
+    private SimpleArray<T> store;
+
+    public AbstractStore(int size) {
+        store = new SimpleArray<>(size);
+    }
 
     /**
      * Метод добавляющий значение в массив.
@@ -29,8 +34,8 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     @Override
     public boolean replace(String id, T model) {
         boolean result = false;
-        for (int index = 0; index < 100; index++) {
-            if (id.equals(store.get(index).getId())) {
+        for (int index = 0; index < store.getSize(); index++) {
+            if (id.equals(getIdByIndex(index))) {
                 store.set(index, model);
                 result = true;
                 break;
@@ -38,7 +43,6 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
         }
         return result;
     }
-
 
     /**
      * Метод удаляет объект по id.
@@ -48,8 +52,8 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     @Override
     public boolean delete(String id) {
         boolean result = false;
-        for (int index = 0; index < 100; index++) {
-            if (id.equals(store.get(index).getId())) {
+        for (int index = 0; index < store.getSize(); index++) {
+            if (id.equals(getIdByIndex(index))) {
                 store.remove(index);
                 result = true;
                 break;
@@ -66,8 +70,8 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     @Override
     public T findById(String id) {
         T result = null;
-        for (int index = 0; index < 100; index++) {
-            if (id.equals(store.get(index).getId())) {
+        for (int index = 0; index < store.getSize(); index++) {
+            if (id.equals(getIdByIndex(index))) {
                 result = store.get(index);
                 break;
             }
@@ -84,5 +88,16 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
      */
     public T getIndex(int index) {
         return store.get(index);
+    }
+
+    /**
+     * Метод предоставляет Id объекта по индексу.
+     * Выбрасывает исключение если индекс выходит за границы массива.
+     *
+     * @param index позиция в массиве.
+     * @return String Id объекта.
+     */
+    public String getIdByIndex(int index) {
+        return store.get(index).getId();
     }
 }
