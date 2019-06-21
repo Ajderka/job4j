@@ -2,6 +2,11 @@ package collectionPro.list;
 
 import java.util.*;
 
+/**
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 20.06.2019.
+ */
 public class ArrayList<E> implements Iterable {
 
     /**
@@ -29,7 +34,7 @@ public class ArrayList<E> implements Iterable {
     /**
      * Создает пустой список с начальной вместимостью указанной в аргументе.
      *
-     * @param  initialCapacity начальная вместимость списка.
+     * @param initialCapacity начальная вместимость списка.
      * @throws IllegalArgumentException Ошибочный аргумент.
      */
     public ArrayList(int initialCapacity) throws IllegalArgumentException {
@@ -66,7 +71,7 @@ public class ArrayList<E> implements Iterable {
     /**
      * Возращает элемент под указанной позицией в списке.
      *
-     * @param  index индекс элемента который возвращаем.
+     * @param index индекс элемента который возвращаем.
      * @return элемент в указанной позицией в этом списке.
      * @throws IndexOutOfBoundsException
      */
@@ -93,7 +98,7 @@ public class ArrayList<E> implements Iterable {
         if ((newSize = size - 1) > index) {
             System.arraycopy(es, index + 1, es, index, newSize - 1);
         }
-        es[newSize] = null;
+        es[size = newSize] = null;
         return oldValue;
     }
 
@@ -104,51 +109,38 @@ public class ArrayList<E> implements Iterable {
     private class Itr implements Iterator<E> {
 
         int cursor; // index of next element to return
-        int lastRet = -1; // index of last element returned; -1 if no such
         int expectedModCount = modCount;
 
         @Override
         public boolean hasNext() {
+            checkForModification();
             return cursor != size;
         }
 
         @Override
-        public E next() throws NoSuchElementException, ConcurrentModificationException{
-            checkForModification();
-            int i = cursor;
-            if (i >= size) {
+        public E next() throws NoSuchElementException {
+            if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            Object[] elementData = ArrayList.this.container;
-            if (i >= elementData.length) {
-                throw new ConcurrentModificationException();
-            }
-            cursor = i + 1;
-            return (E) elementData[lastRet = i];
+            return (E) container[cursor++];
         }
 
         @Override
-        public void remove() throws IndexOutOfBoundsException, IllegalStateException {
-            if (lastRet < 0) {
+        public void remove() throws IllegalStateException {
+            if (cursor - 1 < 0) {
                 throw new IllegalStateException();
             }
             checkForModification();
-
-            try {
-                ArrayList.this.remove(lastRet);
-                cursor = lastRet;
-                lastRet = -1;
-                expectedModCount = modCount;
-            } catch (IndexOutOfBoundsException ex) {
-                throw new IndexOutOfBoundsException();
-            }
+            ArrayList.this.remove(--cursor);
+            expectedModCount = modCount;
         }
 
         /**
          * Проверка списка на изменения после инициализации итератора.
+         *
          * @throws ConcurrentModificationException if modified.
          */
-        final void checkForModification() throws ConcurrentModificationException{
+        final void checkForModification() throws ConcurrentModificationException {
             if (modCount != expectedModCount) {
                 throw new ConcurrentModificationException();
             }
