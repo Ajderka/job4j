@@ -94,10 +94,10 @@ public class LinkedList<E> {
     }
 
     private class Itr implements Iterator<E> {
-
+        private Node<E> last;
+        private Node<E> next;
         private int cursor;
         private int expectedModCount = modCount;
-
 
         @Override
         public boolean hasNext() {
@@ -111,8 +111,10 @@ public class LinkedList<E> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            return LinkedList.this.get(cursor++);
-
+            last = next;
+            next = next.next;
+            cursor++;
+            return last.data;
         }
 
         @Override
