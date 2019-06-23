@@ -1,4 +1,4 @@
-package collectionPro.list;
+package ru.job4j.collectionpro.list;
 
 import java.util.*;
 
@@ -49,7 +49,8 @@ public class ArrayList<E> implements Iterable {
      * Увеличение емкости списка в два раза.
      */
     private Object[] grow() {
-        return container = Arrays.copyOf(container, container.length * 2);
+        container = Arrays.copyOf(container, container.length * 2);
+        return container;
     }
 
     /**
@@ -95,10 +96,12 @@ public class ArrayList<E> implements Iterable {
         E oldValue = (E) es[index];
 
         modCount++;
-        if ((newSize = size - 1) > index) {
+        newSize = size - 1;
+        if (newSize > index) {
             System.arraycopy(es, index + 1, es, index, newSize - 1);
         }
-        es[size = newSize] = null;
+        size = newSize;
+        es[size] = null;
         return oldValue;
     }
 

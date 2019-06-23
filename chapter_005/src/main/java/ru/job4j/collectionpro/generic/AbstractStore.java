@@ -1,4 +1,4 @@
-package collectionPro.generic;
+package ru.job4j.collectionpro.generic;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).

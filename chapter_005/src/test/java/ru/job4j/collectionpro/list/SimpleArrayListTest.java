@@ -1,4 +1,4 @@
-package collectionPro.list;
+package ru.job4j.collectionpro.list;
 
 import org.junit.Test;
 import org.junit.Before;

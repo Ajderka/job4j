@@ -1,4 +1,4 @@
-package collectionPro.generic;
+package ru.job4j.collectionpro.generic;
 
 
 /**
