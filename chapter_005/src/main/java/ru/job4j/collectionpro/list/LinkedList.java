@@ -1,4 +1,4 @@
-package collectionPro.list;
+package ru.job4j.collectionpro.list;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -94,8 +94,7 @@ public class LinkedList<E> {
     }
 
     private class Itr implements Iterator<E> {
-        private Node<E> last;
-        private Node<E> next;
+        private Node<E> node = LinkedList.this.first;
         private int cursor;
         private int expectedModCount = modCount;
 
@@ -111,10 +110,10 @@ public class LinkedList<E> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            last = next;
-            next = next.next;
+            E result = node.data;
+            node = node.next;
             cursor++;
-            return last.data;
+            return result;
         }
 
         @Override
