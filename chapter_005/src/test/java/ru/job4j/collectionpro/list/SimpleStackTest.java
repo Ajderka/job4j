@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
  * @since 24.06.2019.
  */
 public class SimpleStackTest {
-    SimpleStack<Integer> stack;
+    private SimpleStack<Integer> stack;
 
     @Before
     public void beforeTest() {
@@ -26,13 +26,15 @@ public class SimpleStackTest {
     @Test
     public void whenPushThenGetElement() {
         stack.push(5);
-        assertThat(stack.get(0), is (5));
+        assertThat(stack.get(0), is(5));
     }
 
     @Test
-    public void whenPollThenReturnDeleteElement () {
+    public void whenPollThenReturnDeleteElement() {
         assertThat(stack.poll(), is(4));
-        assertThat(stack.get(0), is (3));
+        assertThat(stack.poll(), is(3));
+        assertThat(stack.poll(), is(2));
+        assertThat(stack.poll(), is(1));
     }
 
 }

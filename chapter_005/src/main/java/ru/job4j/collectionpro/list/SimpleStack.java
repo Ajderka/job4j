@@ -5,39 +5,38 @@ package ru.job4j.collectionpro.list;
  * @version 1.
  * @since 24.06.2019.
  */
-public class SimpleStack<T> extends LinkedList {
-
-    public void push(T value) {
-        addFirst(value);
-    }
-
-    public T poll() {
-        T result = (T) removeFirst();
-        return result;
-    }
-}
-/*
-Используя контейнер на базе связанного списка создать контейнер Stack.
-
 public class SimpleStack<T> {
-   public <T> poll()
 
-   public void push(T value);
+    /**
+     * Создаем объект класса, на методы которого будем ссылаться.
+     */
+    private LinkedList<T> list = new LinkedList<>();
+
+    /**
+     * Помещает объект в коллекцию.
+     *
+     * @param value значение объекта.
+     */
+    public void push(T value) {
+        list.addFirst(value);
+    }
+
+    /**
+     * Удаляет объект с начала списка.
+     *
+     * @return T значение объекта который будет удален.
+     */
+    public T poll() {
+        return (T) list.removeFirst();
+    }
+
+    /**
+     * Возвращает значение объекта по индексу.
+     *
+     * @param index индекс элемента который возвращаем.
+     * @return T значение объекта который будет возвращен.
+     */
+    public T get(int index) {
+        return (T) list.get(index);
+    }
 }
-
-Метод poll() - должен возвращать значение и удалять его из коллекции.
-Метод push(T value) - помещает значение в коллекцию.
-При реализации стека нужно  использовать коллекции #159, которые вы реализовывали в предыдущих заданиях.
-
-Описание Stack - стек. Описывается LIFO - last input first output.
-
-То есть, последний зашел и первый вышел. Например.
-
-push(1);
-push(2);
-push(3);
-
-poll() - 3
-poll() - 2
-poll() - 1
- */
