@@ -15,10 +15,6 @@ public class LinkedList<E> {
     private Node<E> last;
     private int modCount;
 
-    public int getSize() {
-        return size;
-    }
-
     /**
      * Добавляет элемент в начало списка.
      *
@@ -73,6 +69,14 @@ public class LinkedList<E> {
         return result.data;
     }
 
+    public E removeFirst() {
+        final E remote = this.first.data;
+        this.first = this.first.next;
+        this.size--;
+        this.modCount++;
+        return remote;
+    }
+
     private boolean isElementIndex(int index) {
         return index >= 0 && index < size;
     }
@@ -82,7 +86,7 @@ public class LinkedList<E> {
         Node<E> prev;
         Node<E> next;
 
-        Node(Node prev, E data, Node next) {
+        Node(Node<E> prev, E data, Node<E> next) {
             this.data = data;
             this.next = next;
             this.prev = prev;
@@ -128,24 +132,3 @@ public class LinkedList<E> {
         }
     }
 }
-
-/*
-Необходимо создать динамический контейнер с методами:
-
-1) add(E value);
-
-2) E get(int index);
-
-3) реализовать интерфейс Iterable<E>.
-
-Внутри контейнер должен базироваться на связанном списке(Node<E> node).
-Использовать стандартные коллекции JDK (ArrayList, LinkedList и т.д.) запрещено. Контейнер должен быть динамическим,
-т.е. увеличиваться по мере добавления элементов.
-
-Итератор должен реализовывать fail-fast поведение, т.е. если с момента создания итератора коллекция подверглась
-структурному изменению, итератор должен кидать ConcurrentModificationException.
-Это достигается через введение счетчика изменений - modCount. Каждая операция, которая структурно модифицирует коллекцию
-должна инкрементировать этот счетчик. В свою очередь итератор запоминает значение этого счетчика на момент своего создания
-(expectedModCount), а затем на каждой итерации сравнивает сохраненное значение, с текущим значением поля modCount,
-если они отличаются, то генерируется исключение.
- */
