@@ -3,22 +3,19 @@ package ru.job4j.collectionpro.list;
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
  * @version 1.
- * @since 24.06.2019.
+ * @since 26.06.2019.
  */
-public class SimpleStack<T> {
+public class SimpleQueue<T> {
 
-    /**
-     * Создаем объект класса, на методы которого будем ссылаться.
-     */
     private LinkedList<T> list = new LinkedList<>();
 
     /**
-     * Помещает объект в начало коллекции.
+     * Помещает объект в конец коллекции.
      *
      * @param value значение объекта.
      */
     public void push(T value) {
-        list.addFirst(value);
+        list.addLast(value);
     }
 
     /**
@@ -39,12 +36,13 @@ public class SimpleStack<T> {
     public T get(int index) {
         return (T) list.get(index);
     }
+
 }
 
 /*
-Используя контейнер на базе связанного списка создать контейнер Stack.
+Нужно реализовать очередь.
 
-public class SimpleStack<T> {
+public class SimpleQueue<T> {
    public <T> poll()
 
    public void push(T value);
@@ -52,17 +50,20 @@ public class SimpleStack<T> {
 
 Метод poll() - должен возвращать значение и удалять его из коллекции.
 Метод push(T value) - помещает значение в коллекцию.
-При реализации стека нужно  использовать коллекции #159, которые вы реализовывали в предыдущих заданиях.
 
-Описание Stack - стек. Описывается LIFO - last input first output.
+Внутри очереди нужно использовать Стеки из задания 5.3.3. Используя контейнер на базе связанного списка создать контейнер Stack
 
-То есть, последний зашел и первый вышел. Например.
+Описание Queue - очередь. Описывается FIFO - first input first output.
+
+То есть, первый зашел и первый вышел. Например.
 
 push(1);
 push(2);
 push(3);
 
-poll() - 3
-poll() - 2
 poll() - 1
+poll() - 2
+poll() - 3
+
+Это задание является тестовым заданием на собеседованиях.
  */
