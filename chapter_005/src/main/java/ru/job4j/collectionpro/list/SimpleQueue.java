@@ -7,7 +7,8 @@ package ru.job4j.collectionpro.list;
  */
 public class SimpleQueue<T> {
 
-    private LinkedList<T> list = new LinkedList<>();
+    private SimpleStack<T> stackIn = new SimpleStack<>();
+    private SimpleStack<T> stackOut = new SimpleStack<>();
 
     /**
      * Помещает объект в конец коллекции.
@@ -15,7 +16,7 @@ public class SimpleQueue<T> {
      * @param value значение объекта.
      */
     public void push(T value) {
-        list.addLast(value);
+        stackIn.push(value);
     }
 
     /**
@@ -24,7 +25,10 @@ public class SimpleQueue<T> {
      * @return T значение объекта который будет удален.
      */
     public T poll() {
-        return (T) list.removeFirst();
+        while (!stackIn.isEmpty())
+            stackOut.push(stackIn.poll());
+        return (T) stackOut.poll();
+
     }
 
     /**
@@ -34,7 +38,9 @@ public class SimpleQueue<T> {
      * @return T значение объекта который будет возвращен.
      */
     public T get(int index) {
-        return (T) list.get(index);
+        while (!stackIn.isEmpty())
+            stackOut.push(stackIn.poll());
+        return (T) stackOut.get(index);
     }
 
 }
@@ -66,4 +72,7 @@ poll() - 2
 poll() - 3
 
 Это задание является тестовым заданием на собеседованиях.
+у вас должно быть в этом классе  два поля стэк из прошлой задачи
+
+и  нужно так организовать их взаимодействие чтоб получилась очередь
  */

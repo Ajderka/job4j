@@ -39,6 +39,10 @@ public class SimpleStack<T> {
     public T get(int index) {
         return (T) list.get(index);
     }
+
+    public boolean isEmpty () {
+        return list.getSize() == 0;
+    }
 }
 
 /*

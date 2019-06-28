@@ -15,6 +15,10 @@ public class LinkedList<E> {
     private Node<E> last;
     private int modCount;
 
+    public int getSize() {
+        return size;
+    }
+
     /**
      * Добавляет элемент в начало списка.
      *

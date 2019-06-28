@@ -27,6 +27,11 @@ public class SimpleQueueTest {
     public void whenPushThenGetElement() {
         stack.push(5);
         assertThat(stack.get(4), is(5));
+        assertThat(stack.get(3), is(4));
+        assertThat(stack.get(2), is(3));
+        assertThat(stack.get(1), is(2));
+        assertThat(stack.get(0), is(1));
+
     }
 
     @Test
