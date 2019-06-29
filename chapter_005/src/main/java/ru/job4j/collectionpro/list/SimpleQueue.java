@@ -11,7 +11,7 @@ public class SimpleQueue<T> {
     private SimpleStack<T> stackOut = new SimpleStack<>();
 
     /**
-     * Помещает объект в конец коллекции.
+     * Помещает объект в конец списка.
      *
      * @param value значение объекта.
      */
@@ -25,8 +25,7 @@ public class SimpleQueue<T> {
      * @return T значение объекта который будет удален.
      */
     public T poll() {
-        while (!stackIn.isEmpty())
-            stackOut.push(stackIn.poll());
+        this.logic();
         return (T) stackOut.poll();
 
     }
@@ -38,13 +37,21 @@ public class SimpleQueue<T> {
      * @return T значение объекта который будет возвращен.
      */
     public T get(int index) {
-        while (!stackIn.isEmpty())
-            stackOut.push(stackIn.poll());
+        this.logic();
         return (T) stackOut.get(index);
     }
 
+    /**
+     * С помощью двух стеков, реализуем очередь.
+     */
+    private void logic() {
+        if (stackOut.isEmpty()) {
+            while (!stackIn.isEmpty()) {
+                stackOut.push(stackIn.poll());
+            }
+        }
+    }
 }
-
 /*
 Нужно реализовать очередь.
 

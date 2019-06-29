@@ -41,4 +41,19 @@ public class SimpleQueueTest {
         assertThat(stack.poll(), is(3));
         assertThat(stack.poll(), is(4));
     }
+
+    @Test
+    public void whenPushPushPollPushGet () {
+        stack.push(5);
+        stack.push(6);
+        assertThat(stack.poll(), is(1));
+        stack.push(7);
+        assertThat(stack.poll(), is(2));
+        assertThat(stack.poll(), is(3));
+        assertThat(stack.poll(), is(4));
+        assertThat(stack.get(0), is(5));
+        assertThat(stack.poll(), is(5));
+        assertThat(stack.poll(), is(6));
+        assertThat(stack.poll(), is(7));
+    }
 }
