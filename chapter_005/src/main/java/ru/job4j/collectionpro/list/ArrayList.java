@@ -7,7 +7,7 @@ import java.util.*;
  * @version 1.
  * @since 20.06.2019.
  */
-public class ArrayList<E> implements Iterable {
+public class ArrayList<E>{
 
     /**
      * Буффер массива в котором хранятся элементы ArrayList.
@@ -29,6 +29,14 @@ public class ArrayList<E> implements Iterable {
      */
     public ArrayList() {
         this.container = new Object[10];
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public int getSizeContainer() {
+        return container.length;
     }
 
     /**
@@ -106,7 +114,7 @@ public class ArrayList<E> implements Iterable {
     }
 
     public Iterator<E> iterator() {
-        return new Itr();
+        return new ArrayList.Itr();
     }
 
     private class Itr implements Iterator<E> {
