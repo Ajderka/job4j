@@ -17,6 +17,7 @@ public class NodeTest {
     private Node second;
     private Node third;
     private Node four;
+    private Node five;
 
     @Before
     public void beforeTest() {
@@ -24,6 +25,7 @@ public class NodeTest {
         second = new Node(2);
         third = new Node(3);
         four = new Node(4);
+        five = new Node(5);
     }
 
     @Test
@@ -49,6 +51,25 @@ public class NodeTest {
         first.next = second;
         second.next = third;
         third.next = four;
+        assertThat(first.hasCycle(first), is(false));
+    }
+
+    @Test
+    public void whenWeDoBigCycle() {
+        first.next = second;
+        second.next = third;
+        third.next = four;
+        four.next = five;
+        five.next = first;
+        assertThat(first.hasCycle(first), is(true));
+    }
+
+    @Test
+    public void whenWeDoNotBigCycle() {
+        first.next = second;
+        second.next = third;
+        third.next = four;
+        four.next = five;
         assertThat(first.hasCycle(first), is(false));
     }
 }

@@ -28,7 +28,7 @@ public class Node<E> {
             while (true) {
                 slow = slow.next;
                 fast = fast.next.next;
-                if (fast == null) {
+                if (fast == null || fast.next == null) {
                     result = false;
                     break;
                 }
