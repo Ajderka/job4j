@@ -7,10 +7,10 @@ import java.util.*;
  * @version 1.
  * @since 20.06.2019.
  */
-public class ArrayList<E>{
+public class SimpleList<E> {
 
     /**
-     * Буффер массива в котором хранятся элементы ArrayList.
+     * Буффер массива в котором хранятся элементы SimpleList.
      */
     private Object[] container;
 
@@ -27,7 +27,7 @@ public class ArrayList<E>{
     /**
      * Создает список с начальной вместимостью десять.
      */
-    public ArrayList() {
+    public SimpleList() {
         this.container = new Object[10];
     }
 
@@ -45,7 +45,7 @@ public class ArrayList<E>{
      * @param initialCapacity начальная вместимость списка.
      * @throws IllegalArgumentException Ошибочный аргумент.
      */
-    public ArrayList(int initialCapacity) throws IllegalArgumentException {
+    public SimpleList(int initialCapacity) throws IllegalArgumentException {
         if (initialCapacity >= 0) {
             this.container = new Object[initialCapacity];
         } else {
@@ -114,7 +114,7 @@ public class ArrayList<E>{
     }
 
     public Iterator<E> iterator() {
-        return new ArrayList.Itr();
+        return new SimpleList.Itr();
     }
 
     private class Itr implements Iterator<E> {
@@ -142,7 +142,7 @@ public class ArrayList<E>{
                 throw new IllegalStateException();
             }
             checkForModification();
-            ArrayList.this.remove(--cursor);
+            SimpleList.this.remove(--cursor);
             expectedModCount = modCount;
         }
 

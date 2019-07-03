@@ -11,12 +11,12 @@ import static org.junit.Assert.assertThat;
  * @version 1.
  * @since 18.06.2019.
  */
-public class SimpleArrayListTest {
-    private SimpleArrayList<Integer> list;
+public class SimpleLinkedListTest {
+    private SimpleLinkedList<Integer> list;
 
     @Before
     public void beforeTest() {
-        list = new SimpleArrayList<>();
+        list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
         list.add(3);

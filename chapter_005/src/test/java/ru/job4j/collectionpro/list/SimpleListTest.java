@@ -13,12 +13,12 @@ import static org.junit.Assert.assertThat;
  * @version 1.
  * @since 28.06.2019.
  */
-public class ArrayListTest {
-    private ArrayList<Integer> list;
+public class SimpleListTest {
+    private SimpleList<Integer> list;
 
     @Before
     public void beforeTest() {
-        list = new ArrayList<>();
+        list = new SimpleList<>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -39,9 +39,9 @@ public class ArrayListTest {
 
     @Test
     public void whenCallConstructorAndGetSizeThat() {
-        ArrayList<Integer> arrayList = new ArrayList<>(15);
+        SimpleList<Integer> simpleList = new SimpleList<>(15);
         assertThat(list.getSizeContainer(), is(10));
-        assertThat(arrayList.getSizeContainer(), is(15));
+        assertThat(simpleList.getSizeContainer(), is(15));
     }
 
     @Test

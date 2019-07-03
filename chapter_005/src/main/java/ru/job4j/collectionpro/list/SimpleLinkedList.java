@@ -5,7 +5,7 @@ package ru.job4j.collectionpro.list;
  * @version 1.
  * @since 18.06.2019.
  */
-public class SimpleArrayList<E> {
+public class SimpleLinkedList<E> {
     private int size;
     private Node<E> first;
 
