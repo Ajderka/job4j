@@ -10,7 +10,6 @@ import java.util.Iterator;
 public class SimpleSet<E> implements Iterable<E> {
 
     private SimpleList<E> container;
-    private int nullCount = 0;
 
     public SimpleSet() {
         container = new SimpleList<>();
@@ -45,17 +44,10 @@ public class SimpleSet<E> implements Iterable<E> {
      */
     private boolean checkForRepetitions(E element) {
         boolean repeat = false;
-        if (element == null) {
-            nullCount++;
-            if (nullCount > 1) {
+        for (int i = 0; i < size(); i++) {
+            if ((element == this.container.get(i))||(element != null && element.equals(this.container.get(i)))) {
                 repeat = true;
-            }
-        } else {
-            for (int i = 0; i < size(); i++) {
-                if (element.equals(this.container.get(i))) {
-                    repeat = true;
-                    break;
-                }
+                break;
             }
         }
         return repeat;
