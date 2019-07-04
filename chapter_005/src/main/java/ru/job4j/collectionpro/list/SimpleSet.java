@@ -10,6 +10,7 @@ import java.util.Iterator;
 public class SimpleSet<E> implements Iterable<E> {
 
     private SimpleList<E> container;
+    private int nullCount = 0;
 
     public SimpleSet() {
         container = new SimpleList<>();
@@ -32,16 +33,32 @@ public class SimpleSet<E> implements Iterable<E> {
      * @param e то что мы добавляем.
      */
     public void add(E e) {
-        boolean repeat = false;
-        for (int i = 0; i < size(); i++) {
-            if (e.equals(this.container.get(i))) {
-                repeat = true;
-                break;
-            }
-        }
-        if (!repeat) {
+        if (!checkForRepetitions(e)) {
             this.container.add(e);
         }
+    }
+
+    /**
+     * Метод проверки на повторения.
+     *
+     * @param element чей дубликат мы ищем.
+     */
+    private boolean checkForRepetitions(E element) {
+        boolean repeat = false;
+        if (element == null) {
+            nullCount++;
+            if (nullCount > 1) {
+                repeat = true;
+            }
+        } else {
+            for (int i = 0; i < size(); i++) {
+                if (element.equals(this.container.get(i))) {
+                    repeat = true;
+                    break;
+                }
+            }
+        }
+        return repeat;
     }
 
     @Override

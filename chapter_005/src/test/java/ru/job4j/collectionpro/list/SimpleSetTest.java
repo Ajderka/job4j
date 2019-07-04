@@ -46,4 +46,14 @@ public class SimpleSetTest {
         assertThat(itr.next(), is("Third"));
         assertThat(itr.hasNext(), is(false));
     }
+
+    @Test
+    public void whenCheckNull () {
+        SimpleSet<Integer> setInt = new SimpleSet<>();
+        setInt.add(1);
+        setInt.add(null);
+        setInt.add(1);
+        setInt.add(null);
+        assertThat(setInt.size(), is(2));
+    }
 }
