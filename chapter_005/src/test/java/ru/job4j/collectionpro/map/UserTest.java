@@ -1,6 +1,10 @@
 package ru.job4j.collectionpro.map;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
@@ -9,4 +13,25 @@ import static org.junit.Assert.*;
  */
 public class UserTest {
 
+    @Test
+    public void whenAddTwoUsers() {
+        Map<User, Object> map = new HashMap<>();
+        User first = new User("Ivan", 0, new GregorianCalendar(1987, 2, 14));
+        User second = new User("Ivan", 0, new GregorianCalendar(1987, 2, 14));
+        map.put(first, "one");
+        map.put(second, "two");
+        System.out.println(map);
+    }
 }
+
+/*
+Создать два объекта User, которые имеют одинаковые поля.
+
+Создать карту Map<User, Object>
+
+Добавить два объекта. Вывести карту на печать. Описать полученный результат словами.
+
+
+
+Объясните полученный результат почему так получилось.
+ */
