@@ -1,6 +1,7 @@
 package ru.job4j.collectionpro.map;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
@@ -30,7 +31,11 @@ public class User {
     public Calendar getBirthday() {
         return birthday;
     }
+
+    @Override
+    public int hashCode() {
+        int result = name == null ? 0 : name.hashCode();
+        result = 31 * result + children;
+        return 31 * result + (birthday == null ? 0 : birthday.hashCode());
+    }
 }
-/*
-Создать модель User и три поля String name, int children, Calendar birthday,
- */
