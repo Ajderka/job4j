@@ -33,9 +33,19 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return children == user.children &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(birthday, user.birthday);
+    }
+
+  /*  @Override
     public int hashCode() {
         int result = name == null ? 0 : name.hashCode();
         result = 31 * result + children;
         return 31 * result + (birthday == null ? 0 : birthday.hashCode());
-    }
+    }*/
 }
