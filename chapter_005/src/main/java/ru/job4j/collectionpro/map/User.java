@@ -42,10 +42,10 @@ public class User {
                 Objects.equals(birthday, user.birthday);
     }
 
-  /*  @Override
+    @Override
     public int hashCode() {
         int result = name == null ? 0 : name.hashCode();
         result = 31 * result + children;
         return 31 * result + (birthday == null ? 0 : birthday.hashCode());
-    }*/
+    }
 }
