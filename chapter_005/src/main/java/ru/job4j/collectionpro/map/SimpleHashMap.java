@@ -188,7 +188,7 @@ public class SimpleHashMap<K, V> {
     }
 
 
-    public Itr iterator() {
+    public Iterator<Node<K, V>> iterator() {
         return new SimpleHashMap.Itr();
     }
 

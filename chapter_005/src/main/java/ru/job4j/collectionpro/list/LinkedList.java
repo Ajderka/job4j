@@ -24,7 +24,7 @@ public class LinkedList<E> {
      *
      * @param data элемент который будет добавлен в список.
      */
-    public void addFirst(E data) {
+    public void add(E data) {
         Node<E> f = first;
         Node<E> newNode = new Node<>(null, data, f);
         first = newNode;
@@ -32,24 +32,6 @@ public class LinkedList<E> {
             last = newNode;
         } else {
             f.prev = newNode;
-        }
-        this.size++;
-        this.modCount++;
-    }
-
-    /**
-     * Добавляет элемент в конец списка.
-     *
-     * @param data элемент который будет добавлен в список.
-     */
-    public void addLast(E data) {
-        Node<E> l = last;
-        Node<E> newNode = new Node<>(l, data, null);
-        last = newNode;
-        if (l == null) {
-            first = newNode;
-        } else {
-            l.next = newNode;
         }
         this.size++;
         this.modCount++;

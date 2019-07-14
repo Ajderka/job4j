@@ -18,7 +18,7 @@ public class SimpleStack<T> {
      * @param value значение объекта.
      */
     void push(T value) {
-        list.addFirst(value);
+        list.add(value);
     }
 
     /**
