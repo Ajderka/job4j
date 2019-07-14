@@ -11,7 +11,7 @@ public class SimpleSet<E> implements Iterable<E> {
 
     private SimpleList<E> container;
 
-    public SimpleSet() {
+    SimpleSet() {
         container = new SimpleList<>();
     }
 
@@ -45,7 +45,7 @@ public class SimpleSet<E> implements Iterable<E> {
     private boolean checkForRepetitions(E element) {
         boolean repeat = false;
         for (int i = 0; i < size(); i++) {
-            if ((element == this.container.get(i))||(element != null && element.equals(this.container.get(i)))) {
+            if ((element == this.container.get(i)) || (element != null && element.equals(this.container.get(i)))) {
                 repeat = true;
                 break;
             }

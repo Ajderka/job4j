@@ -53,12 +53,12 @@ public class SimpleHashMap<K, V> {
         return size;
     }
 
-    public SimpleHashMap() {
+    SimpleHashMap() {
         table = new Node[INITIAL_CAPACITY];
         grow();
     }
 
-    public int capacity() {
+    int capacity() {
         return table.length;
     }
 
@@ -69,7 +69,7 @@ public class SimpleHashMap<K, V> {
      * @param value значение элемента.
      * @return true если вставка прошла успешно, false если ячейка была занята.
      */
-    public boolean insert(K key, V value) {
+    boolean insert(K key, V value) {
         boolean valid = false;
         int hash = hash(key);
         int i = (table.length - 1) & hash;
@@ -78,8 +78,9 @@ public class SimpleHashMap<K, V> {
             valid = true;
             modCount++;
         }
-        if (size++ >= threshold)
+        if (size++ >= threshold) {
             resize();
+        }
         return valid;
     }
 
@@ -126,7 +127,7 @@ public class SimpleHashMap<K, V> {
      * @param key ключ элемента который должен быть удален.
      * @return true если элемент удален, false если элемент не обнаружен.
      */
-    public boolean delete(K key) {
+    boolean delete(K key) {
         boolean valid = false;
         int i = (table.length - 1) & hash(key);
         if (table[i] != null && table[i].key == key) {
@@ -145,8 +146,7 @@ public class SimpleHashMap<K, V> {
      * @return значение хэш.
      */
     private static int hash(Object key) {
-        int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        return (key == null) ? 0 : (key.hashCode()) ^ (key.hashCode() >>> 16);
     }
 
     static class Node<K, V> {
@@ -162,11 +162,15 @@ public class SimpleHashMap<K, V> {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             Node<?, ?> node = (Node<?, ?>) o;
-            return Objects.equals(key, node.key) &&
-                    Objects.equals(value, node.value);
+            return Objects.equals(key, node.key)
+                    && Objects.equals(value, node.value);
         }
 
         @Override
@@ -184,7 +188,7 @@ public class SimpleHashMap<K, V> {
     }
 
 
-    public Iterator<Node<K, V>> iterator() {
+    public Itr iterator() {
         return new SimpleHashMap.Itr();
     }
 

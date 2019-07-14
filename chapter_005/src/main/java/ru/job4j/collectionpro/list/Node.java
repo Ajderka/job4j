@@ -5,12 +5,12 @@ package ru.job4j.collectionpro.list;
  * @version 1.
  * @since 1.07.2019.
  */
-public class Node<E> {
+class Node<E> {
 
-    E value;
+    private E value;
     Node<E> next;
 
-    public Node(E value) {
+    Node(E value) {
         this.value = value;
     }
 
@@ -21,15 +21,14 @@ public class Node<E> {
      */
     boolean hasCycle(Node first) {
         boolean result = false;
-        Node slow, fast;
-        slow = fast = first;
+        Node slow = first;
+        Node fast = first;
 
         if (first != null) {
             while (true) {
                 slow = slow.next;
                 fast = fast.next.next;
                 if (fast == null || fast.next == null) {
-                    result = false;
                     break;
                 }
                 if (slow == fast) {

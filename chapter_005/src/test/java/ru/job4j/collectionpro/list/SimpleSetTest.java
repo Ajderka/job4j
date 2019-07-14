@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
  * @since 3.07.2019.
  */
 public class SimpleSetTest {
-    SimpleSet<String> set;
+    private SimpleSet<String> set;
 
     @Before
     public void beforeTest() {
@@ -48,7 +48,7 @@ public class SimpleSetTest {
     }
 
     @Test
-    public void whenCheckNull () {
+    public void whenCheckNull() {
         SimpleSet<Integer> setInt = new SimpleSet<>();
         setInt.add(1);
         setInt.add(null);

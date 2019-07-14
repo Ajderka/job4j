@@ -47,12 +47,12 @@ public class SimpleListTest {
     @Test
     public void whenWeCallNextAndHasNext() {
         Iterator<Integer> itr = list.iterator();
-        assertThat(itr.next(),is(1));
-        assertThat(itr.hasNext(),is(true));
-        assertThat(itr.next(),is(2));
-        assertThat(itr.hasNext(),is(true));
-        assertThat(itr.next(),is(3));
-        assertThat(itr.hasNext(),is(false));
+        assertThat(itr.next(), is(1));
+        assertThat(itr.hasNext(), is(true));
+        assertThat(itr.next(), is(2));
+        assertThat(itr.hasNext(), is(true));
+        assertThat(itr.next(), is(3));
+        assertThat(itr.hasNext(), is(false));
     }
 
     @Test(expected = IllegalStateException.class)

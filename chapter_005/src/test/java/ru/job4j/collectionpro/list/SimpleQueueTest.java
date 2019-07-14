@@ -43,7 +43,7 @@ public class SimpleQueueTest {
     }
 
     @Test
-    public void whenPushPushPollPushGet () {
+    public void whenPushPushPollPushGet() {
         stack.push(5);
         stack.push(6);
         assertThat(stack.poll(), is(1));

@@ -17,7 +17,7 @@ public class SimpleStack<T> {
      *
      * @param value значение объекта.
      */
-    public void push(T value) {
+    void push(T value) {
         list.addFirst(value);
     }
 
@@ -26,8 +26,8 @@ public class SimpleStack<T> {
      *
      * @return T значение объекта который будет удален.
      */
-    public T poll() {
-        return (T) list.removeFirst();
+    T poll() {
+        return list.removeFirst();
     }
 
     /**
@@ -37,10 +37,10 @@ public class SimpleStack<T> {
      * @return T значение объекта который будет возвращен.
      */
     public T get(int index) {
-        return (T) list.get(index);
+        return list.get(index);
     }
 
-    public boolean isEmpty () {
+    boolean isEmpty() {
         return list.getSize() == 0;
     }
 }
