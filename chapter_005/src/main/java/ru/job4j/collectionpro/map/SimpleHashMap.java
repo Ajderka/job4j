@@ -73,7 +73,8 @@ public class SimpleHashMap<K, V> {
         boolean valid = false;
         int hash = hash(key);
         int i = (table.length - 1) & hash;
-        if (table[i] == null) {
+        Object k;
+        if ((table[i] == null) || (table[i].hash == hash && ((k = table[i].key) == key || key.equals(k)))) {
             table[i] = new Node<>(hash, key, value);
             valid = true;
             modCount++;
@@ -130,7 +131,7 @@ public class SimpleHashMap<K, V> {
     boolean delete(K key) {
         boolean valid = false;
         int i = (table.length - 1) & hash(key);
-        if (table[i] != null && table[i].key == key) {
+        if (table[i] != null) {
             table[i] = null;
             valid = true;
             size--;

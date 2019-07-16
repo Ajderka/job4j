@@ -24,11 +24,11 @@ public class SimpleHashMapTest {
     }
 
     @Test
-    public void whenAddEqualsThenFalse() {
+    public void whenAddEqualsThenTrue() {
         User first = new User("John", 0, new GregorianCalendar(1990, 10, 11));
         User second = new User("John", 0, new GregorianCalendar(1990, 10, 11));
         assertThat(map.insert(first, "first"), is(true));
-        assertThat(map.insert(second, "second"), is(false));
+        assertThat(map.insert(second, "second"), is(true));
     }
 
     @Test
