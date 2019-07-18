@@ -72,6 +72,32 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * Метод проверяет количество дочерних элементов в дереве.
+     * Если их <= 2 - то дерево бинарное.
+     *
+     * @return
+     */
+    @Override
+    public boolean isBinary() {
+        boolean valid = true;
+        int counter;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            counter = 0;
+            Node<E> el = data.poll();
+            for (Node<E> child : el.leaves()) {
+                data.offer(child);
+                if (++counter > 2) {
+                    valid = false;
+                    break;
+                }
+            }
+        }
+        return valid;
+    }
+
+    /**
      * Возвращает итератор для элементов в этом списке,
      * в правильной последовательности.
      *
