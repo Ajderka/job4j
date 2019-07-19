@@ -44,7 +44,11 @@ public class Node<E extends Comparable<E>> {
         return this.value.compareTo(that) == 0;
     }
 
-    public E getValue() {
+    E getValue() {
         return value;
+    }
+
+    int getSize() {
+        return children.size();
     }
 }
