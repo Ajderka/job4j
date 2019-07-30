@@ -1,6 +1,8 @@
 package ru.job4j.collectionpro.test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ayder Khayredinov (emage.haf@gmail.com).
@@ -9,6 +11,8 @@ import java.util.List;
  */
 public class Analise {
 
+    private Info info = new Info();
+
     /**
      * Метод возвращает статистику изменений.
      *
@@ -16,42 +20,34 @@ public class Analise {
      * @param current  изменненые данные.
      * @return возвращает статистику об изменении коллекции.
      */
-    public Info diff(List<User> previous, List<User> current) {
 
-        Info info = new Info();
+    Info diffMap(List<User> previous, List<User> current) {
 
+        Map<Integer, String> mapPrevious = new HashMap<>();
+        Map<Integer, String> mapCurrent = new HashMap<>();
 
-        for (User previous1 : previous) {
-            int deleteMarker = 0;
-            for (User user : current) {
-                if (previous1.getId() == user.getId()
-                        && !previous1.getName().equals(user.getName())) {
-                    info.setChanged(info.getChanged() + 1);
-                }
-                if (previous1.getId() == user.getId()) {
-                    deleteMarker++;
-                    break;
-                }
-            }
-            if (deleteMarker == 0) {
-                info.setDeleted(info.getDeleted() + 1);
-            }
+        for (User userPrevious : previous) {
+            mapPrevious.put(userPrevious.getId(), userPrevious.getName());
+        }
+        for (User userCurrent : current) {
+            mapCurrent.put(userCurrent.getId(), userCurrent.getName());
         }
 
-        for (User user : current) {
-            int addMarker = 0;
-            for (User previous1 : previous) {
-                if (user.getId() == previous1.getId()) {
-                    addMarker++;
-                    break;
-                }
-            }
-            if (addMarker == 0) {
-                info.setAdded(info.getAdded() + 1);
+        for (Integer key : mapPrevious.keySet()) {
+            if (mapCurrent.containsKey(key) && !mapPrevious.get(key).equals(mapCurrent.get(key))) {
+                this.info.setChanged(this.info.getChanged() + 1);
+            } else if (!mapCurrent.containsKey(key)) {
+                this.info.setDeleted(this.info.getDeleted() + 1);
             }
         }
-        return info;
+        for (Integer key : mapCurrent.keySet()) {
+            if (!mapPrevious.containsKey(key)) {
+                this.info.setAdded(this.info.getAdded() + 1);
+            }
+        }
+        return this.info;
     }
+
 
     public static class User {
         int id;

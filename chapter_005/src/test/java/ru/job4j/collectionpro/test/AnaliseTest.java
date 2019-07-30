@@ -30,7 +30,7 @@ public class AnaliseTest {
                 new Analise.User(4, "Valya"),
                 new Analise.User(5, "Petya")
         );
-        Analise.Info info = analise.diff(userPrevious, userCurrent);
+        Analise.Info info = analise.diffMap(userPrevious, userCurrent);
         assertThat(info.getAdded(), is(2));
     }
 
@@ -46,7 +46,7 @@ public class AnaliseTest {
                 new Analise.User(2, "Petya"),
                 new Analise.User(3, "Sasha")
         );
-        Analise.Info info = analise.diff(userPrevious, userCurrent);
+        Analise.Info info = analise.diffMap(userPrevious, userCurrent);
         assertThat(info.getChanged(), is(1));
     }
 
@@ -64,7 +64,7 @@ public class AnaliseTest {
                 new Analise.User(2, "Petya"),
                 new Analise.User(3, "Sasha")
         );
-        Analise.Info info = analise.diff(userPrevious, userCurrent);
+        Analise.Info info = analise.diffMap(userPrevious, userCurrent);
         assertThat(info.getDeleted(), is(2));
     }
 }
