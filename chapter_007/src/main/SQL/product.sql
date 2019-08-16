@@ -31,7 +31,7 @@ SELECT t.name, COUNT (type_id) FROM product AS p
 INNER JOIN type AS t
 ON p.type_id = t.id
 GROUP BY t.name
-WHERE COUNT(type_id) < 10;
+HAVING COUNT(type_id) < 10;
 
 8. Вывести все продукты и их тип.
 SELECT p.name, t.name FROM product AS p
