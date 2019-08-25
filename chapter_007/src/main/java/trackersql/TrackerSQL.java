@@ -117,7 +117,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
              ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 listOfNames.add(new Item(rs.getString("id"), rs.getString("name"),
-                        rs.getString("description"), rs.getLong("created")));
+                        rs.getString("description"), rs.getTimestamp("created").getTime()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -139,7 +139,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
                     listOfItemsByName.add(new Item(rs.getString("id"), rs.getString("name"),
-                            rs.getString("description"), rs.getLong("created")));
+                            rs.getString("description"), rs.getTimestamp("created").getTime()));
                 }
             }
         } catch (SQLException e) {
