@@ -23,11 +23,16 @@
             <artifactId>log4j-core</artifactId>
             <version>2.11.1</version>
         </dependency>
-       <!-- <dependency>
+        <dependency>
             <groupId>ru.job4j</groupId>
-            <artifactId>chapter_002</artifactId>
+            <artifactId>chapter_02</artifactId>
             <version>2.0</version>
-        </dependency>-->
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.5</version>
+        </dependency>
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -66,12 +71,30 @@
             <artifactId>activation</artifactId>
             <version>1.1.1</version>
         </dependency>
-      <!--  &lt;!&ndash; https://mvnrepository.com/artifact/postgresql/postgresql &ndash;&gt;
         <dependency>
-            <groupId>antlr</groupId>
-            <artifactId>antlr</artifactId>
-            <version>2.7.7</version>
-        </dependency>-->
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13-beta-3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13-beta-3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <!--  &lt;!&ndash; https://mvnrepository.com/artifact/postgresql/postgresql &ndash;&gt;
+          <dependency>
+              <groupId>antlr</groupId>
+              <artifactId>antlr</artifactId>
+              <version>2.7.7</version>
+          </dependency>-->
     </dependencies>
 
     <build>

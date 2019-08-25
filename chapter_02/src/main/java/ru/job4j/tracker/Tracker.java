@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @version 1.
  * @since 1.1.2019.
  */
-public class Tracker {
+public class Tracker implements ITracker {
 
     /**
      * Объект генерирующий случайное число.
