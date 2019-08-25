@@ -42,7 +42,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
      */
     @Override
     public Item add(Item item) {
-        String insertItem = "INSERT INTO tracker (name, description, create) VALUES (?,?,?)";
+        String insertItem = "INSERT INTO tracker (name, description, created) VALUES (?,?,?)";
         try (final PreparedStatement st = this.connection.prepareStatement(insertItem, Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, item.getName());
             st.setString(2, item.getDescription());
@@ -70,7 +70,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     public boolean replace(String id, Item item) {
         boolean result = false;
         try (final PreparedStatement st = this.connection.prepareStatement(
-                "UPDATE tracker SET name = ?, description = ?, create = ? WHERE id = ?"
+                "UPDATE tracker SET name = ?, description = ?, created = ? WHERE id = ?"
         )) {
             st.setString(1, item.getName());
             st.setString(2, item.getDescription());
@@ -117,7 +117,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
              ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 listOfNames.add(new Item(rs.getString("id"), rs.getString("name"),
-                        rs.getString("description"), rs.getLong("create")));
+                        rs.getString("description"), rs.getLong("created")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,12 +134,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public List<Item> findByName(String key) {
         List<Item> listOfItemsByName = new ArrayList<>();
-        try (final PreparedStatement st = this.connection.prepareStatement("SELECT * FROM tracker WHERE name = ?");
-             ResultSet rs = st.executeQuery()) {
+        try (final PreparedStatement st = this.connection.prepareStatement("SELECT * FROM tracker WHERE name = ?")) {
             st.setString(1, key);
-            while (rs.next()) {
-                listOfItemsByName.add(new Item(rs.getString("id"), rs.getString("name"),
-                        rs.getString("description"), rs.getLong("create")));
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    listOfItemsByName.add(new Item(rs.getString("id"), rs.getString("name"),
+                            rs.getString("description"), rs.getLong("created")));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -161,7 +162,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             st.setInt(1, Integer.valueOf(id));
             while (rs.next()) {
                 result = new Item(rs.getString("id"), rs.getString("name"),
-                        rs.getString("description"), rs.getLong("create"));
+                        rs.getString("description"), rs.getLong("created"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

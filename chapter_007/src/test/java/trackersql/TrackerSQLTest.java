@@ -18,7 +18,7 @@ public class TrackerSQLTest {
     public void whenCreateNewItemThenTrue() {
         TrackerSQL sql = new TrackerSQL();
         sql.init();
-        sql.add(new Item("Frank", "description", 123L));
+        sql.add(new Item("Frank", "description"));
         assertThat(sql.findByName("Frank").size(), is (1));
     }
 }
