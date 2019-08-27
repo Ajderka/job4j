@@ -106,6 +106,19 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     }
 
     /**
+     * Delete the all item in the List. (for test only)
+     *
+     * @return boolean result process.
+     */
+    public void deleteAll() {
+        try (final PreparedStatement st = this.connection.prepareStatement("DELETE FROM tracker")) {
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Method that returns all element.
      *
      * @return list with all element.
@@ -157,12 +170,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public Item findById(String id) {
         Item result = null;
-        try (final PreparedStatement st = this.connection.prepareStatement("SELECT * FROM  tracker WHERE id = ?");
-             ResultSet rs = st.executeQuery()) {
+        try (final PreparedStatement st = this.connection.prepareStatement("SELECT * FROM  tracker WHERE id = ?")) {
             st.setInt(1, Integer.valueOf(id));
-            while (rs.next()) {
-                result = new Item(rs.getString("id"), rs.getString("name"),
-                        rs.getString("description"), rs.getLong("created"));
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    result = new Item(rs.getString("id"), rs.getString("name"),
+                            rs.getString("description"), rs.getTimestamp("created").getTime());
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

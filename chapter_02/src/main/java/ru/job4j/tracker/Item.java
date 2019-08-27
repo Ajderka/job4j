@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
-import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Class  Item.
@@ -77,6 +78,24 @@ public class Item {
         this.description = description;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return create == item.create &&
+                Objects.equals(id, item.id) &&
+                Objects.equals(name, item.name) &&
+                Objects.equals(description, item.description) &&
+                Arrays.equals(comments, item.comments);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, name, description, create);
+        result = 31 * result + Arrays.hashCode(comments);
+        return result;
+    }
 
     @Override
     public String toString() {
