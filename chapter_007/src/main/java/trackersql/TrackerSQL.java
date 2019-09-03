@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 03.09.2019.
+ */
 public class TrackerSQL implements ITracker, AutoCloseable {
 
     private Connection connection;

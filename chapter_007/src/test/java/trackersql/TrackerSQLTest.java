@@ -8,6 +8,11 @@ import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
+/**
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 03.09.2019.
+ */
 public class TrackerSQLTest {
 
     @Test

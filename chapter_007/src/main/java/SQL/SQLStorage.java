@@ -6,6 +6,11 @@ import principle004.UsageLog4j2;
 
 import java.sql.*;
 
+/**
+ * @author Ayder Khayredinov (emage.haf@gmail.com).
+ * @version 1.
+ * @since 03.09.2019.
+ */
 public class SQLStorage {
     private static final Logger Log = LogManager.getLogger(UsageLog4j2.class.getName());
 
