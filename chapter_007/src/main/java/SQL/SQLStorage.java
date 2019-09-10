@@ -23,8 +23,7 @@ public class SQLStorage {
             conn = DriverManager.getConnection(url, username, password);
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM car");
-            while (rs.next())
-            {
+            while (rs.next()) {
                 System.out.println(String.format("%s %s", rs.getInt("car_engine_id"), rs.getInt("car_body_id")));
             }
             rs.close();
