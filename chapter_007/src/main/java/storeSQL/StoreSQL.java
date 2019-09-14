@@ -1,5 +1,9 @@
 package storeSQL;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import principle004.UsageLog4j2;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +14,7 @@ import java.util.List;
  * @since 03.09.2019.
  */
 public class StoreSQL implements AutoCloseable {
+    private static final Logger Log = LogManager.getLogger(UsageLog4j2.class.getName());
 
     private final Config config;
     private Connection connect = null;
@@ -27,7 +32,7 @@ public class StoreSQL implements AutoCloseable {
             statement.executeUpdate("DROP TABLE IF EXISTS account");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS account ( field INTEGER )");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
     }
 
@@ -38,12 +43,17 @@ public class StoreSQL implements AutoCloseable {
      * @throws SQLException if exception.
      */
     public void generate(int size) throws SQLException {
-        try (Statement statement = connect.createStatement()) {
-            for (int index = 1; index <= size; index++) {
-                statement.executeUpdate(String.format("INSERT INTO account VALUES (%s)", index));
+        this.connect.setAutoCommit(false);
+        try (PreparedStatement prep = this.connect.prepareStatement("INSERT INTO account VALUES (?);")) {
+            for (int i = 1; i <= size; i++) {
+                prep.setInt(1, i);
+                prep.addBatch();
             }
+            prep.executeBatch();
+            connect.commit();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
+            connect.rollback();
         }
     }
 
@@ -54,16 +64,16 @@ public class StoreSQL implements AutoCloseable {
      */
     public List<Entry> load() {
         List<Entry> list = new ArrayList<>();
-        try {
-            Statement st = this.connect.createStatement();
+        try (Statement st = this.connect.createStatement()) {
             st.execute("SELECT * FROM account");
             ResultSet rs = st.getResultSet();
             while (rs.next()) {
                 list.add(new Entry(rs.getInt(1)));
             }
+            st.close();
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.error(e.getMessage(), e);
         }
         return list;
     }
@@ -84,7 +94,7 @@ public class StoreSQL implements AutoCloseable {
                 System.out.println("A new database has been created.");
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage(), e);
         }
     }
 
@@ -95,7 +105,7 @@ public class StoreSQL implements AutoCloseable {
                 this.connect = conn;
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Log.error(e.getMessage(), e);
         }
     }
 
@@ -105,7 +115,7 @@ public class StoreSQL implements AutoCloseable {
             try {
                 connect.close();
             } catch (SQLException e) {
-                System.out.println(e);
+                Log.error(e.getMessage(), e);
             }
         }
     }
