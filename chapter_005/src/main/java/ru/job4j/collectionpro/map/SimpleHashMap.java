@@ -73,8 +73,8 @@ public class SimpleHashMap<K, V> {
         boolean valid = false;
         int hash = hash(key);
         int i = (table.length - 1) & hash;
-        Object k;
-        if ((table[i] == null) || (table[i].hash == hash && ((k = table[i].key) == key || key.equals(k)))) {
+        Object k = table[i].key;
+        if ((table[i] == null) || (table[i].hash == hash && k == key || key.equals(k))) {
             table[i] = new Node<>(hash, key, value);
             valid = true;
             modCount++;

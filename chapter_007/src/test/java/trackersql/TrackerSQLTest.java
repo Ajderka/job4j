@@ -26,13 +26,13 @@ public class TrackerSQLTest {
         TrackerSQL sql = new TrackerSQL();
         sql.init();
         sql.deleteAll();
-        Item Frank = new Item("Frank", "man", 10L);
-        Item Met = new Item("Met", "man", 5L);
-        Item Ketty = new Item("Ketty", "woman", 3L);
-        sql.add(Frank);
-        sql.add(Met);
-        sql.add(Ketty);
-        List<Item> expected = List.of(Frank, Met, Ketty);
+        Item frank = new Item("Frank", "man", 10L);
+        Item met = new Item("Met", "man", 5L);
+        Item ketty = new Item("Ketty", "woman", 3L);
+        sql.add(frank);
+        sql.add(met);
+        sql.add(ketty);
+        List<Item> expected = List.of(frank, met, ketty);
         assertThat(sql.findAll(), is(expected));
     }
 
@@ -53,14 +53,14 @@ public class TrackerSQLTest {
         TrackerSQL sql = new TrackerSQL();
         sql.init();
         sql.deleteAll();
-        Item Frank = new Item("Frank", "man", 10L);
-        Item Met = new Item("Met", "man", 5L);
-        Item Ketty = new Item("Ketty", "woman", 3L);
-        sql.add(Frank);
-        sql.add(Met);
-        sql.add(Ketty);
-        List<Item> expected = List.of(Met);
-        assertThat(sql.findByName(Met.getName()), is(expected));
+        Item frank = new Item("Frank", "man", 10L);
+        Item met = new Item("Met", "man", 5L);
+        Item ketty = new Item("Ketty", "woman", 3L);
+        sql.add(frank);
+        sql.add(met);
+        sql.add(ketty);
+        List<Item> expected = List.of(met);
+        assertThat(sql.findByName(met.getName()), is(expected));
     }
 
     @Test

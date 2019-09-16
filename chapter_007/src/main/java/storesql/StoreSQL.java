@@ -1,8 +1,8 @@
-package storeSQL;
+package storesql;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import principle004.UsageLog4j2;
+import logger.UsageLog4j2;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
  * @since 03.09.2019.
  */
 public class StoreSQL implements AutoCloseable {
-    private static final Logger Log = LogManager.getLogger(UsageLog4j2.class.getName());
+    private static final Logger LOG = LogManager.getLogger(UsageLog4j2.class.getName());
 
     private final Config config;
     private Connection connect = null;
@@ -32,7 +32,7 @@ public class StoreSQL implements AutoCloseable {
             statement.executeUpdate("DROP TABLE IF EXISTS account");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS account ( field INTEGER )");
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -52,7 +52,7 @@ public class StoreSQL implements AutoCloseable {
             prep.executeBatch();
             connect.commit();
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             connect.rollback();
         }
     }
@@ -73,7 +73,7 @@ public class StoreSQL implements AutoCloseable {
             st.close();
             rs.close();
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         return list;
     }
@@ -94,7 +94,7 @@ public class StoreSQL implements AutoCloseable {
                 System.out.println("A new database has been created.");
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -105,7 +105,7 @@ public class StoreSQL implements AutoCloseable {
                 this.connect = conn;
             }
         } catch (SQLException e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -115,7 +115,7 @@ public class StoreSQL implements AutoCloseable {
             try {
                 connect.close();
             } catch (SQLException e) {
-                Log.error(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
             }
         }
     }

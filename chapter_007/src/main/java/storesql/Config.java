@@ -1,4 +1,4 @@
-package storeSQL;
+package storesql;
 
 import java.io.InputStream;
 import java.util.Properties;

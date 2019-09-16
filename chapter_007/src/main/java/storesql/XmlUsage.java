@@ -1,4 +1,4 @@
-package storeSQL;
+package storesql;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;

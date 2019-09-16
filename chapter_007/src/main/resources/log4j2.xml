@@ -12,7 +12,7 @@
         <Logger name="principle003" level="trace" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger name="SQL" level="trace" additivity="false">
+        <Logger name="sql" level="trace" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="error">

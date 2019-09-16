@@ -1,8 +1,8 @@
-package SQL;
+package sql;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import principle004.UsageLog4j2;
+import logger.UsageLog4j2;
 
 import java.sql.*;
 
@@ -12,7 +12,7 @@ import java.sql.*;
  * @since 03.09.2019.
  */
 public class SQLStorage {
-    private static final Logger Log = LogManager.getLogger(UsageLog4j2.class.getName());
+    private static final Logger LOG = LogManager.getLogger(UsageLog4j2.class.getName());
 
     public static void main(String[] args) {
         String url = "jdbc:postgresql://localhost:5432/car";
@@ -29,13 +29,13 @@ public class SQLStorage {
             rs.close();
             st.close();
         } catch (Exception e) {
-            Log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         } finally {
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException e) {
-                    Log.error(e.getMessage(), e);
+                    LOG.error(e.getMessage(), e);
                 }
             }
         }

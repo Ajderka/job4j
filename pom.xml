@@ -10,6 +10,9 @@
     <profiles>
         <profile>
             <id>test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <db.url>jdbc:postgresql://localhost:5432/tracker</db.url>
                 <db.username>user</db.username>
@@ -19,6 +22,9 @@
         </profile>
         <profile>
             <id>production</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <db.url>jdbc:postgresql://localhost:5432/tracker</db.url>
                 <db.username>user</db.username>

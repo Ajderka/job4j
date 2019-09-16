@@ -1,4 +1,4 @@
-package storeSQL;
+package storesql;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;

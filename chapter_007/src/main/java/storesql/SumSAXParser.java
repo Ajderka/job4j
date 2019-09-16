@@ -1,4 +1,4 @@
-package storeSQL;
+package storesql;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;

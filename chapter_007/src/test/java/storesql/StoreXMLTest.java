@@ -1,4 +1,4 @@
-package storeSQL;
+package storesql;
 
 import org.junit.Test;
 
@@ -38,7 +38,7 @@ public class StoreXMLTest {
         storeXML.save(entry);
         storeSQL.close();
 
-        Entries result = new Entries ();
+        Entries result = new Entries();
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Entries.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
