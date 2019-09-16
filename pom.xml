@@ -44,15 +44,6 @@
                 <db.driver>org.postgresql.Driver</db.driver>
             </properties>
         </profile>
-        <profile>
-            <id>parser_sql</id>
-            <properties>
-                <db.url>jdbc:postgresql://127.0.0.1:5432/vacancies</db.url>
-                <db.username>user</db.username>
-                <db.password>1402</db.password>
-                <db.driver>org.postgresql.Driver</db.driver>
-            </properties>
-        </profile>
     </profiles>
 
     <properties>
