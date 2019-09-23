@@ -21,6 +21,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     public TrackerSQL(Connection connection) {
         this.connection = connection;
     }
+
     /**
      * Method that loading the driver and connecting to the database.
      *
@@ -193,7 +194,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws SQLException {
         if (connection != null) {
             try {
                 connection.close();
