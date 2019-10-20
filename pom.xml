@@ -61,6 +61,7 @@
         <module>chapter_004</module>
         <module>chapter_005</module>
         <module>chapter_007</module>
+        <module>parsersql</module>
     </modules>
 
     <build>
@@ -135,6 +136,12 @@
     </build>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.11.3</version>
+        </dependency>
 
         <dependency>
             <groupId>org.hamcrest</groupId>
