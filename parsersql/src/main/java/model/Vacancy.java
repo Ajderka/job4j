@@ -1,3 +1,5 @@
+package model;
+
 import java.util.Objects;
 
 public class Vacancy {
@@ -6,7 +8,8 @@ public class Vacancy {
     private String text;
     private String link;
 
-    public Vacancy(String link) {
+    public Vacancy(String link,  String name) {
+        this.name = name;
         this.link = link;
     }
 
@@ -41,7 +44,7 @@ public class Vacancy {
 
     @Override
     public String toString() {
-       return String.format("Vacancy id: %s. Title %s. URL: %s", id, name, link);
+       return String.format("model.Vacancy id: %s. Title: %s. URL: %s. Text: %s", id, name, link, text);
     }
 
     @Override
