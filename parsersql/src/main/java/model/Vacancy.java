@@ -13,10 +13,10 @@ public class Vacancy {
         this.link = link;
     }
 
-    public Vacancy(String name, String text, String link) {
-        this.name = name;
+    public Vacancy(String title, String text, String url) {
+        this.name = title;
         this.text = text;
-        this.link = link;
+        this.link = url;
     }
 
     public Vacancy(int id, String name, String text, String link) {
