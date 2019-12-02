@@ -6,12 +6,14 @@ import org.jsoup.select.Elements;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class Parsers implements Parser {
 
@@ -29,16 +31,17 @@ public class Parsers implements Parser {
         try {
             List<Vacancy> vacancies = new ArrayList<>();
             Document page = getPage();
+
             Element tableFirst = page.select("table.forumTable").first();
             Elements models = tableFirst.select("td.postslisttopic");
-
             for (Element element : models) {
                 String title = element.child(0).text();
                 String url = element.select("a").attr("href");
                 if (title.toLowerCase().contains("java")) {
-                    Element data = Jsoup.connect(url).get().selectFirst("table.msgTable");
-                    Element text = data.select("td.msgBody").get(1);
-                    vacancies.add(new Vacancy(title, text.text(), url));
+                    Element Info = Jsoup.connect(url).get().selectFirst("table.msgTable");
+                    Element description = Info.select("td.msgBody").get(1);
+                    vacancies.add(new Vacancy(title, description.text(), url));
+                    String data = Info.select("td.msgFooter").first().text();
                 }
             }
             vacancies.forEach(System.out::println);
@@ -55,6 +58,18 @@ public class Parsers implements Parser {
                 + ",link text)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.execute();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+    }
+
+    private void insertInTable (Vacancy vacancy) {
+        String sql = "INSERT INTO vacancies (name, description, link) Values (?,?,?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, vacancy.getName());
+            preparedStatement.setString(2, vacancy.getText());
+            preparedStatement.setString(3, vacancy.getLink());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }

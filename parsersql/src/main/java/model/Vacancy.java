@@ -26,6 +26,18 @@ public class Vacancy {
         this.link = link;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
