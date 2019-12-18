@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Vacancy {
@@ -7,23 +8,13 @@ public class Vacancy {
     private String name;
     private String text;
     private String link;
+    private Date date;
 
-    public Vacancy(String link,  String name) {
-        this.name = name;
-        this.link = link;
-    }
-
-    public Vacancy(String title, String text, String url) {
-        this.name = title;
-        this.text = text;
-        this.link = url;
-    }
-
-    public Vacancy(int id, String name, String text, String link) {
-        this.id = id;
+    public Vacancy(String name, String text, String link, Date date) {
         this.name = name;
         this.text = text;
         this.link = link;
+        this.date = date;
     }
 
     public String getName() {
@@ -36,6 +27,10 @@ public class Vacancy {
 
     public String getLink() {
         return link;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     public void setId(int id) {
@@ -54,9 +49,13 @@ public class Vacancy {
         this.link = link;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
-       return String.format("model.Vacancy id: %s. Title: %s. URL: %s. Text: %s", id, name, link, text);
+       return String.format("model.Vacancy id: %s. Title: %s. URL: %s. Text: %s. Date: %s", id, name, link, text, date);
     }
 
     @Override

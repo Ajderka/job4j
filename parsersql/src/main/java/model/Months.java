@@ -1,8 +1,19 @@
 package model;
 
 public enum Months {
-    янв(1), фев(2), мар(3), апр(4), май(5), июн(6),
-    июл(7), авг(8), сен(9), окт(10), ноя(11), дек(12);
+
+    ЯНВ(1),
+    ФЕВ(2),
+    МАР(3),
+    АПР(4),
+    МАЙ(5),
+    ИЮН(6),
+    ИЮЛ(7),
+    АВГ(8),
+    СЕН(9),
+    ОКТ(10),
+    НОЯ(11),
+    ДЕК(12);
 
     public int number;
 
@@ -12,5 +23,12 @@ public enum Months {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return "Months{" +
+                "number=" + number +
+                '}';
     }
 }
