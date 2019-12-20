@@ -6,14 +6,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import storesql.Config;
 
 import javax.management.StandardEmitterMBean;
 import javax.xml.crypto.Data;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +23,11 @@ public class Parsers implements Parser {
     private static final Logger LOG = LoggerFactory.getLogger(Parsers.class.getName());
     private Connection connection;
     private List<Vacancy> vacancies = new ArrayList<>();
+    private Configurator config;
+
+    public Parsers(Configurator config) {
+        this.config = config;
+    }
 
     private static Document getPage() throws Exception {
         String url = "https://www.sql.ru/forum/job-offers";
@@ -55,11 +58,11 @@ public class Parsers implements Parser {
 
     private void createTable() {
         String sql = "CREATE TABLE if not exists vacancies ("
-                + "id serial primary key not null"
+                + "id serial primary key"
                 + ",name varchar(255) UNIQUE not null"
                 + ",description text"
                 + ",link text"
-                + ",data text)";
+                + ",data timestamp)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -80,7 +83,7 @@ public class Parsers implements Parser {
         }
     }
 
-    private Date formatStringToDate (String string) throws ParseException {
+    private Date formatStringToDate(String string) throws ParseException {
         String[] splitString = string.split(" ");
         int numberOfMonths = Months.valueOf(splitString[1].toUpperCase()).getNumber();
         String asd = splitString[0] + numberOfMonths + splitString[2];
@@ -90,11 +93,25 @@ public class Parsers implements Parser {
     }
 
     public static void main(String[] args) throws Exception {
-        Parsers parsers = new Parsers();
+        Configurator configurator = new Configurator();
+        configurator.getProperties("app.properties");
+        Parsers parsers = new Parsers(configurator);
+        parsers.initConnection();
         parsers.parsPages();
         parsers.createTable();
         parsers.vacancies.forEach(vacancy -> parsers.insertInTable(vacancy));
 
+    }
+
+    public void initConnection() {
+        try {
+            Connection conn = DriverManager.getConnection(config.get("url"), config.get("username"), config.get("password"));
+            if (conn != null) {
+                this.connection = conn;
+            }
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 
     private boolean verificationJava(String string) {
