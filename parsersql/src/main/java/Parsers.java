@@ -4,29 +4,59 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import storesql.Config;
+import org.slf4j.LoggerFactory;
 
-import javax.management.StandardEmitterMBean;
-import javax.xml.crypto.Data;
 import java.net.URL;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.Date;
 
+/**
+ * Class for working with database.
+ * Parsers a list vacancies and stores them in database.
+ */
 public class Parsers implements Parser {
 
+    /**
+     * Logger for info output.
+     */
     private static final Logger LOG = LoggerFactory.getLogger(Parsers.class.getName());
+
+    /**
+     * Connection to the database.
+     */
     private Connection connection;
+
+    /**
+     * Loader properties with connection options.
+     */
+    private Properties properties;
+
+    /**
+     * HashSet to protection the database from duplicates.
+     */
+    private HashSet<String> checker;
+
     private List<Vacancy> vacancies = new ArrayList<>();
     private Configurator config;
 
     public Parsers(Configurator config) {
         this.config = config;
+    }
+
+    /**
+     * Only for tests.
+     * @param connection
+     */
+    public Parsers(Connection connection) {
+        this.connection = connection;
+    }
+
+    public Parsers(Properties properties) {
+        this.properties = properties;
     }
 
     private static Document getPage() throws Exception {
@@ -38,6 +68,7 @@ public class Parsers implements Parser {
     public void parsPages() {
         try {
             Document page = getPage();
+            LOG.info("Parser starting.");
             Element tableFirst = page.select("table.forumTable").first();
             Elements models = tableFirst.select("td.postslisttopic");
             for (Element element : models) {
@@ -51,6 +82,7 @@ public class Parsers implements Parser {
                 }
             }
             vacancies.forEach(System.out::println);
+            LOG.info("Parser finishing.");
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -70,17 +102,26 @@ public class Parsers implements Parser {
         }
     }
 
-    private void insertInTable(Vacancy vacancy) {
+    /**
+     * Add vacancy to database.
+     * (подумать как реализовать так, чтобы не было одинаковых вакансий)
+     * @param vacancy to be added.
+     * @return true if added to database or false if not added.
+     */
+    private boolean insertInTable(Vacancy vacancy) {
+        boolean valid = false;
         String sql = "INSERT INTO vacancies (name, description, link, date) Values (?,?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, vacancy.getName());
             preparedStatement.setString(2, vacancy.getText());
             preparedStatement.setString(3, vacancy.getLink());
-            preparedStatement.setDate(4, (java.sql.Date) vacancy.getDate());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(String.valueOf(vacancy.getDate().getTime())));
             preparedStatement.executeUpdate();
+            valid = true;
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
+        return valid;
     }
 
     private Date formatStringToDate(String string) throws ParseException {
@@ -105,7 +146,7 @@ public class Parsers implements Parser {
 
     public void initConnection() {
         try {
-            Connection conn = DriverManager.getConnection(config.get("url"), config.get("username"), config.get("password"));
+            Connection conn = DriverManager.getConnection(config.get("jdbc.url"), config.get("jdbc.username"), config.get("jdbc.password"));
             if (conn != null) {
                 this.connection = conn;
             }
