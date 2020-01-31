@@ -11,8 +11,11 @@ import java.net.URL;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Class for working with database.
@@ -31,44 +34,43 @@ public class Parsers implements Parser {
     private Connection connection;
 
     /**
-     * Loader properties with connection options.
-     */
-    private Properties properties;
-
-    /**
      * HashSet to protection the database from duplicates.
      */
     private HashSet<String> checker;
 
     private List<Vacancy> vacancies = new ArrayList<>();
+
     private Configurator config;
 
-    public Parsers(Configurator config) {
+    private Parsers(Configurator config) {
         this.config = config;
     }
 
     /**
      * Only for tests.
-     * @param connection
+     *
+     * @param connection соеденение.
      */
     public Parsers(Connection connection) {
         this.connection = connection;
     }
 
-    public Parsers(Properties properties) {
-        this.properties = properties;
-    }
-
-    private static Document getPage() throws Exception {
-        String url = "https://www.sql.ru/forum/job-offers";
-        return Jsoup.parse(new URL(url), 3000);
+    private void initConnection() {
+        try {
+            Connection conn = DriverManager.getConnection(config.get("jdbc.url"), config.get("jdbc.username"), config.get("jdbc.password"));
+            if (conn != null) {
+                this.connection = conn;
+            }
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 
     @Override
     public void parsPages() {
         try {
             Document page = getPage();
-            LOG.info("Parser starting.");
+            LOG.info("Parser starting."); //?
             Element tableFirst = page.select("table.forumTable").first();
             Elements models = tableFirst.select("td.postslisttopic");
             for (Element element : models) {
@@ -77,7 +79,7 @@ public class Parsers implements Parser {
                 if (verificationJava(title)) {
                     Element Info = Jsoup.connect(url).get().selectFirst("table.msgTable");
                     Element description = Info.select("td.msgBody").get(1);
-                    String data = Info.select("td.msgFooter").first().text();
+                    String data = Info.select("td.msgFooter").first().text().split(",")[0];
                     vacancies.add(new Vacancy(title, description.text(), url, formatStringToDate(data)));
                 }
             }
@@ -86,6 +88,16 @@ public class Parsers implements Parser {
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
+    }
+
+    private static Document getPage() throws Exception {
+        String url = "https://www.sql.ru/forum/job-offers";
+        return Jsoup.parse(new URL(url), 3000);
+    }
+
+    private boolean verificationJava(String string) {
+        return string.toLowerCase().contains("java") && !string.toLowerCase().contains("javascript")
+                && !string.toLowerCase().contains("java script");
     }
 
     private void createTable() {
@@ -105,17 +117,20 @@ public class Parsers implements Parser {
     /**
      * Add vacancy to database.
      * (подумать как реализовать так, чтобы не было одинаковых вакансий)
+     *
      * @param vacancy to be added.
      * @return true if added to database or false if not added.
+     * попробуй просто создать  так Timestamp ts=new Timestamp(date.getTime());
      */
     private boolean insertInTable(Vacancy vacancy) {
         boolean valid = false;
-        String sql = "INSERT INTO vacancies (name, description, link, date) Values (?,?,?,?)";
+
+        String sql = "INSERT INTO vacancies (name, description, link, data) Values (?,?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, vacancy.getName());
             preparedStatement.setString(2, vacancy.getText());
             preparedStatement.setString(3, vacancy.getLink());
-            preparedStatement.setTimestamp(4, Timestamp.valueOf(String.valueOf(vacancy.getDate().getTime())));
+            preparedStatement.setTimestamp(4, new Timestamp(vacancy.getDate().getTime()));
             preparedStatement.executeUpdate();
             valid = true;
         } catch (SQLException e) {
@@ -125,12 +140,37 @@ public class Parsers implements Parser {
     }
 
     private Date formatStringToDate(String string) throws ParseException {
-        String[] splitString = string.split(" ");
-        int numberOfMonths = Months.valueOf(splitString[1].toUpperCase()).getNumber();
-        String asd = splitString[0] + numberOfMonths + splitString[2];
-        SimpleDateFormat format = new SimpleDateFormat("ddMMyy");
-        Date docDate = format.parse(asd);
-        return docDate;
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Date result;
+        if (string.toLowerCase().equals("сегодня")) {
+            result = new SimpleDateFormat("dd-MM-yyyy")
+                    .parse(localDateTime.getDayOfMonth()
+                            + "-" + localDateTime.getMonth().getValue()
+                            + "-" + localDateTime.getYear()
+                    );
+        } else if (string.toLowerCase().equals("вчера")) {
+            localDateTime = localDateTime.minusDays(1);
+            result = new SimpleDateFormat("dd-MM-yyyy")
+                    .parse(localDateTime.getDayOfMonth()
+                            + "-" + localDateTime.getMonth().getValue()
+                            + "-" + localDateTime.getYear()
+                    );
+        } else {
+            String[] splitString = string.split(" ");
+            result = new SimpleDateFormat("dd-MM-yyyy")
+                    .parse(splitString[0]
+                            + "-" + Months.valueOf(splitString[1].toUpperCase()).getNumber()
+                            + "-20" + splitString[2]
+                    );
+        }
+        return result;
+    }
+
+    @Override
+    public void close() throws Exception {
+        if (this.connection != null) {
+            connection.close();
+        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -140,30 +180,6 @@ public class Parsers implements Parser {
         parsers.initConnection();
         parsers.parsPages();
         parsers.createTable();
-        parsers.vacancies.forEach(vacancy -> parsers.insertInTable(vacancy));
-
-    }
-
-    public void initConnection() {
-        try {
-            Connection conn = DriverManager.getConnection(config.get("jdbc.url"), config.get("jdbc.username"), config.get("jdbc.password"));
-            if (conn != null) {
-                this.connection = conn;
-            }
-        } catch (SQLException e) {
-            LOG.error(e.getMessage(), e);
-        }
-    }
-
-    private boolean verificationJava(String string) {
-        return string.toLowerCase().contains("java") && !string.toLowerCase().contains("javascript")
-                && !string.toLowerCase().contains("java script");
-    }
-
-    @Override
-    public void close() throws Exception {
-        if (this.connection != null) {
-            connection.close();
-        }
+        parsers.vacancies.forEach(parsers::insertInTable);
     }
 }

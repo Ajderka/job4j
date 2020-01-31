@@ -68,9 +68,4 @@ public class Vacancy {
                 Objects.equals(text, vacancy.text) &&
                 Objects.equals(link, vacancy.link);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, text, link);
-    }
 }
