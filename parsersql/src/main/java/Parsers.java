@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -32,11 +31,6 @@ public class Parsers implements Parser {
      * Connection to the database.
      */
     private Connection connection;
-
-    /**
-     * HashSet to protection the database from duplicates.
-     */
-    private HashSet<String> checker;
 
     private List<Vacancy> vacancies = new ArrayList<>();
 
@@ -113,7 +107,6 @@ public class Parsers implements Parser {
             LOG.error(e.getMessage(), e);
         }
     }
-
     /**
      * Add vacancy to database.
      * (подумать как реализовать так, чтобы не было одинаковых вакансий)
@@ -182,4 +175,35 @@ public class Parsers implements Parser {
         parsers.createTable();
         parsers.vacancies.forEach(parsers::insertInTable);
     }
+
+
+    //Denis Mironenko, [02.02.20 20:37]
+    //создаешь SchedulerPars с дефолтными настройками
+    //
+    //Denis Mironenko, [02.02.20 20:37]
+    //SchedulerPars scheduler = StdSchedulerFactory.getDefaultScheduler();
+    //
+    //Denis Mironenko, [02.02.20 20:37]
+    //делаешь отдельный класс который реализует интерфейс Job
+    //
+    //Denis Mironenko, [02.02.20 20:38]
+    //в нем реализуешь метод execute
+    //
+    //Айдер Хайрединов, [02.02.20 20:38]
+    //[В ответ на Denis Mironenko]
+    //Припоминаю
+    //
+    //Denis Mironenko, [02.02.20 20:39]
+    //[В ответ на Denis Mironenko]
+    //потом JobDetail jobDetail = JobBuilder.newJob(JobParser.class).build();
+    //
+    //Denis Mironenko, [02.02.20 20:39]
+    //далее создаешь триггер и закидываешь в планировщик новую таску
+    //
+    //Denis Mironenko, [02.02.20 20:40]
+    //url=jdbc:postgresql://127.0.0.1:5432/vacancy
+    //username=postgres
+    //password=password123
+    //driver-class-name=org.postgresql.Driver
+    //cron.time=0 0 12 * * ?
 }
