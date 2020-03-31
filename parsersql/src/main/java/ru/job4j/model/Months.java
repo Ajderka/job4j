@@ -1,4 +1,4 @@
-package model;
+package ru.job4j.model;
 
 public enum Months {
 
@@ -24,6 +24,8 @@ public enum Months {
     public int getNumber() {
         return number;
     }
+
+    // лишний кусок кода
 
     @Override
     public String toString() {

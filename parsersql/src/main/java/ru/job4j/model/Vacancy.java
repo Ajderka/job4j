@@ -1,4 +1,4 @@
-package model;
+package ru.job4j.model;
 
 import java.util.Date;
 import java.util.Objects;
@@ -55,7 +55,7 @@ public class Vacancy {
 
     @Override
     public String toString() {
-       return String.format("model.Vacancy id: %s. Title: %s. URL: %s. Text: %s. Date: %s", id, name, link, text, date);
+       return String.format("Vacancy id: %s. Title: %s. URL: %s. Text: %s. Date: %s", id, name, link, text, date);
     }
 
     @Override
