@@ -47,16 +47,16 @@ public class Parsers implements Parser {
         this.connection = connection;
     }
 
-    private void initConnection() {
-        try {
-            Connection conn = DriverManager.getConnection(config.get("jdbc.url"), config.get("jdbc.username"), config.get("jdbc.password"));
-            if (conn != null) {
-                this.connection = conn;
-            }
-        } catch (SQLException e) {
-            LOG.error(e.getMessage(), e);
-        }
-    }
+//    private void initConnection() {
+//        try {
+//            Connection conn = DriverManager.getConnection(Config.get("jdbc.url"), Config.get("jdbc.username"), Config.get("jdbc.password"));
+//            if (conn != null) {
+//                this.connection = conn;
+//            }
+//        } catch (SQLException e) {
+//            LOG.error(e.getMessage(), e);
+//        }
+//    }
 
     @Override
     public void parsPages() {
@@ -164,7 +164,7 @@ public class Parsers implements Parser {
     }
 
     public void run() {
-        this.initConnection();
+//        this.initConnection();
         this.parsPages();
         this.createTable();
         this.vacancies.forEach(this::insertInTable);

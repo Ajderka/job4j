@@ -7,34 +7,26 @@ import org.slf4j.LoggerFactory;
 import ru.job4j.Config;
 import ru.job4j.Parsers;
 
-import static org.quartz.TriggerBuilder.newTrigger;
-
 public class SchedulerPars {
 
     private static final Logger LOG = LoggerFactory.getLogger(Parsers.class.getName());
 
-    public void task() throws SchedulerException {
-        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-
-        JobDetail jobDetail = JobBuilder.newJob(JobPars.class).build();
-        Trigger trigger = newTrigger().withIdentity("trigger")
-                .startNow()
-                .withSchedule(CronScheduleBuilder.cronSchedule(Config.getCronTime("app.properties")))
-                .startNow()
-                .build();
-        scheduler.scheduleJob(jobDetail, trigger);
-        scheduler.start();
-   /*     SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-        Scheduler scheduler = schedulerFactory.getScheduler();
-        JobDetail jobDetail = newJob(JobPars.class).withIdentity("job1").build();
-        JobDataMap dm = jobDetail.getJobDataMap();
-        Properties properties = Configurator.getProperties(prop);
-        dm.put("prop", properties);
-        String cron = properties.getProperty("cron.time");
-        Trigger trigger = newTrigger().withIdentity("trigger1").withSchedule(cronSchedule(cron))
-                .forJob("job1").build();
-        scheduler.scheduleJob(jobDetail, trigger);
-        scheduler.start();*/
+    private void task() {
+        try {
+            JobDetail jobDetail = JobBuilder.newJob(JobPars.class).build();
+            JobDataMap jobDataMap = jobDetail.getJobDataMap();
+            jobDataMap.put("nameProperties", "app.properties");
+            Trigger trigger = TriggerBuilder
+                    .newTrigger()
+                    .withIdentity("trigger")
+                    .withSchedule(CronScheduleBuilder.cronSchedule(Config.getCronTime("app.properties")))
+                    .build();
+            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+            scheduler.start();
+            scheduler.scheduleJob(jobDetail, trigger);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
   }
 
     public static void main(String[] args) {

@@ -4,7 +4,6 @@ import logger.UsageLog4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,14 +24,14 @@ public class Config {
         }
     }
 
-    public static Properties getProperties(String name) throws IOException {
-        try (InputStream inputStream = Config.class.getClassLoader().getResourceAsStream(name)) {
-            properties.load(inputStream);
-        } catch (IOException e) {
-            LOG.error("Error", e);
-        }
-        return properties;
-    }
+//    public static Properties getProperties(String name) throws IOException {
+//        try (InputStream inputStream = Config.class.getClassLoader().getResourceAsStream(name)) {
+//            properties.load(inputStream);
+//        } catch (IOException e) {
+//            LOG.error("Error", e);
+//        }
+//        return properties;
+//    }
 
     public static Connection getConnection(String properties) {
         try (InputStream in = Config.class.getClassLoader().getResourceAsStream(properties)) {
@@ -49,7 +48,7 @@ public class Config {
         }
     }
 
-    public String get(String key) {
-        return this.properties.getProperty(key);
+    public static String get(String key) {
+        return properties.getProperty(key);
     }
 }

@@ -25,8 +25,6 @@ public enum Months {
         return number;
     }
 
-    // лишний кусок кода
-
     @Override
     public String toString() {
         return "Months{" +
