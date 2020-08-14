@@ -33,7 +33,7 @@ public class SchedulerPars {
        SchedulerPars sp = new SchedulerPars();
        try {
            sp.task();
-       } catch (SchedulerException e) {
+       } catch (Exception e) {
            LOG.error("ERROR", e);
        }
     }
