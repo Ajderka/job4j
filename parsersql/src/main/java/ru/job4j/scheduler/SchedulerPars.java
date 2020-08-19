@@ -37,5 +37,4 @@ public class SchedulerPars {
            LOG.error("ERROR", e);
        }
     }
-
 }
